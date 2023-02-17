@@ -12,7 +12,7 @@ model Bargain {
   id                Int      @id @default(autoincrement())
   product           String
   description       String
-  active            Boolean
+  active            Boolean  @default(true)
   votes             Vote[]
   comments          Comment[]
   createdAt         DateTime @default(now())
@@ -21,7 +21,7 @@ model Bargain {
 model Comment {
   id                Int      @id @default(autoincrement())
   comment           String
-  active            Boolean
+  active            Boolean  @default(true)
   bargain           Bargain  @relation(fields: [bargainId], references: [id])
   bargainId         Int
   createdAt         DateTime @default(now())
@@ -30,7 +30,7 @@ model Comment {
 model Vote {
   id                Int      @id @default(autoincrement())
   vote              VoteType
-  active            Boolean
+  active            Boolean  @default(true)
   bargain           Bargain  @relation(fields: [bargainId], references: [id])
   bargainId         Int
   createdAt         DateTime @default(now())
