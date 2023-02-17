@@ -1,5 +1,6 @@
 import type { ShowBargainsQuery } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
@@ -28,7 +29,7 @@ export const Success = ({
       {showBargains.map((item) => {
         return (
           <li key={item.id}>
-            <h3>{item.product}</h3>
+            <Link to={routes.showBargain({ id: item.id })}>{item.product}</Link>
             <p>{item.description}</p>
           </li>
         )

@@ -28,5 +28,10 @@ export const Failure = ({
 export const Success = ({
   showBargain,
 }: CellSuccessProps<FindShowBargainQuery, FindShowBargainQueryVariables>) => {
-  return <div>{JSON.stringify(showBargain)}</div>
+  return (
+    <div>
+      <h2>{showBargain.product}</h2>
+      <p>{showBargain.description}</p>
+    </div>
+  )
 }
