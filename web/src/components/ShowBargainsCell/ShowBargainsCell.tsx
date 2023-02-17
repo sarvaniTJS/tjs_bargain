@@ -26,7 +26,12 @@ export const Success = ({
   return (
     <ul>
       {showBargains.map((item) => {
-        return <li key={item.id}>{JSON.stringify(item)}</li>
+        return (
+          <li key={item.id}>
+            <h3>{item.product}</h3>
+            <p>{item.description}</p>
+          </li>
+        )
       })}
     </ul>
   )
