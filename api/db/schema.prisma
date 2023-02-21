@@ -43,8 +43,8 @@ enum VoteType {
 
 model User {
   id                Int      @id @default(autoincrement())
-  accessToken       String
-  email             String
+  externalId        String   @unique
+  email             String   @unique
   userName          String
   createdAt         DateTime @default(now())
 }
