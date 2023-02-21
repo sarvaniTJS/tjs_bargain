@@ -10,8 +10,8 @@ export const schema = gql`
   }
 
   type Query {
-    bargains: [Bargain!]! @requireAuth
-    bargain(id: Int!): Bargain @requireAuth
+    bargains: [Bargain!]! @skipAuth
+    bargain(id: Int!): Bargain @skipAuth
   }
 
   input CreateBargainInput {

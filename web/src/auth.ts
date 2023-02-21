@@ -14,6 +14,9 @@ const auth0 = new Auth0Client({
   cacheLocation: 'localstorage',
   audience: process.env.AUTH0_AUDIENCE,
 
+  authorizeTimeoutInSeconds: 3,
+  httpTimeoutInSeconds: 3,
+
   // `useRefreshTokens` is required for automatically extending sessions beyond what's set in the initial JWT expiration.
   // See https://auth0.com/docs/tokens/refresh-tokens.
   // useRefreshTokens: true,
