@@ -34,6 +34,17 @@ CREATE TABLE "Vote" (
     CONSTRAINT "Vote_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "User" (
+    "id" SERIAL NOT NULL,
+    "accessToken" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "userName" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
 -- AddForeignKey
 ALTER TABLE "Comment" ADD CONSTRAINT "Comment_bargainId_fkey" FOREIGN KEY ("bargainId") REFERENCES "Bargain"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
