@@ -16,12 +16,12 @@ export const bargain: QueryResolvers['bargain'] = ({ id }) => {
   })
 }
 
-export const createBargain: MutationResolvers['createBargain'] = ({
+export const createBargain: MutationResolvers['createBargain'] = async ({
   input,
 }) => {
-  const user = db.user.findUnique({
+  const user = await db.user.findUnique({
     where: {
-      externalId: input.userId,
+      externalId: input.externalId,
     },
   })
   return db.bargain.create({

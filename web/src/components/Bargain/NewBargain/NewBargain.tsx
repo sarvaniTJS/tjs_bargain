@@ -32,7 +32,7 @@ const NewBargain = () => {
 
   const onSave = (input: CreateBargainInput) => {
     createBargain({
-      variables: { input: { ...input, userId: userMetadata.sub } },
+      variables: { input: { ...input, externalId: userMetadata.sub } },
     })
   }
 

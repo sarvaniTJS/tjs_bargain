@@ -20,7 +20,7 @@ export const schema = gql`
     product: String!
     description: String!
     active: Boolean!
-    userId: Int!
+    externalId: String!
   }
 
   input UpdateBargainInput {
