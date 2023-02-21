@@ -16,9 +16,21 @@ export const vote: QueryResolvers['vote'] = ({ id }) => {
   })
 }
 
-export const createVote: MutationResolvers['createVote'] = ({ input }) => {
+export const createVote: MutationResolvers['createVote'] = async ({
+  input,
+}) => {
+  const user = await db.user.findUnique({
+    where: {
+      externalId: input.externalId,
+    },
+  })
   return db.vote.create({
-    data: input,
+    data: {
+      vote: input.vote,
+      active: input.active,
+      bargainId: input.bargainId,
+      userId: user.id,
+    },
   })
 }
 
