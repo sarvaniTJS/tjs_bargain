@@ -24,6 +24,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   showBargains,
 }: CellSuccessProps<ShowBargainsQuery>) => {
+  console.log('showBargains', showBargains)
   return (
     <ul>
       {showBargains.map((item) => {

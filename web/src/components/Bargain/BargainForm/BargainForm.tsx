@@ -25,16 +25,16 @@ interface BargainFormProps {
 
 const BargainForm = (props: BargainFormProps) => {
   const onSubmit = (data: FormBargain) => {
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
+
+
+
+
+
+
+
+
+
+
     props.onSave(data, props?.bargain?.id)
   }
 
@@ -47,7 +47,7 @@ const BargainForm = (props: BargainFormProps) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="product"
           className="rw-label"
@@ -55,7 +55,7 @@ const BargainForm = (props: BargainFormProps) => {
         >
           Product
         </Label>
-        
+
           <TextField
             name="product"
             defaultValue={props.bargain?.product}
@@ -63,7 +63,7 @@ const BargainForm = (props: BargainFormProps) => {
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
           />
-        
+
 
         <FieldError name="product" className="rw-field-error" />
 
@@ -74,7 +74,7 @@ const BargainForm = (props: BargainFormProps) => {
         >
           Description
         </Label>
-        
+
           <TextField
             name="description"
             defaultValue={props.bargain?.description}
@@ -82,7 +82,7 @@ const BargainForm = (props: BargainFormProps) => {
             errorClassName="rw-input rw-input-error"
             validation={{ required: true }}
           />
-        
+
 
         <FieldError name="description" className="rw-field-error" />
 
@@ -93,14 +93,14 @@ const BargainForm = (props: BargainFormProps) => {
         >
           Active
         </Label>
-        
+
           <CheckboxField
             name="active"
             defaultChecked={props.bargain?.active}
             className="rw-input"
             errorClassName="rw-input rw-input-error"
           />
-        
+
 
         <FieldError name="active" className="rw-field-error" />
 

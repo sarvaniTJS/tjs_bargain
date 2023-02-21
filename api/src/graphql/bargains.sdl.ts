@@ -6,6 +6,8 @@ export const schema = gql`
     active: Boolean!
     votes: [Vote]!
     comments: [Comment]!
+    userId: Int!
+    user: User!
     createdAt: DateTime!
   }
 
@@ -18,6 +20,7 @@ export const schema = gql`
     product: String!
     description: String!
     active: Boolean!
+    userId: Int!
   }
 
   input UpdateBargainInput {

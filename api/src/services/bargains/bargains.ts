@@ -19,8 +19,18 @@ export const bargain: QueryResolvers['bargain'] = ({ id }) => {
 export const createBargain: MutationResolvers['createBargain'] = ({
   input,
 }) => {
+  const user = db.user.findUnique({
+    where: {
+      externalId: input.userId,
+    },
+  })
   return db.bargain.create({
-    data: input,
+    data: {
+      product: input.product,
+      description: input.description,
+      active: input.active,
+      userId: user.id,
+    },
   })
 }
 

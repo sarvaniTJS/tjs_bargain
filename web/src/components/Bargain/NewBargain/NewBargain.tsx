@@ -1,10 +1,11 @@
+import type { CreateBargainInput } from 'types/graphql'
+
 import { navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import BargainForm from 'src/components/Bargain/BargainForm'
-
-import type { CreateBargainInput } from 'types/graphql'
 
 const CREATE_BARGAIN_MUTATION = gql`
   mutation CreateBargainMutation($input: CreateBargainInput!) {
@@ -15,6 +16,7 @@ const CREATE_BARGAIN_MUTATION = gql`
 `
 
 const NewBargain = () => {
+  const { userMetadata } = useAuth()
   const [createBargain, { loading, error }] = useMutation(
     CREATE_BARGAIN_MUTATION,
     {
@@ -29,7 +31,9 @@ const NewBargain = () => {
   )
 
   const onSave = (input: CreateBargainInput) => {
-    createBargain({ variables: { input } })
+    createBargain({
+      variables: { input: { ...input, userId: userMetadata.sub } },
+    })
   }
 
   return (
