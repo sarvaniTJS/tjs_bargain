@@ -1,10 +1,10 @@
 import { db } from 'src/lib/db'
 
 exports.handler = async function (event) {
-  const { email, sub } = JSON.parse(event.body) as Record<string, string>
+  const { email, sub, picture } = JSON.parse(event.body) as Record<string, string>
   try {
     const user = await db.user.create({
-      data: { email, externalId: sub, userName: email },
+      data: { email, externalId: sub, userName: email, picture },
     })
     return {
       statusCode: 200,
