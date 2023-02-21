@@ -1,8 +1,12 @@
 import { db } from 'src/lib/db'
 
 exports.handler = async function (event) {
-  const { email, sub, picture } = JSON.parse(event.body) as Record<string, string>
+  const { email, sub, picture } = JSON.parse(event.body) as Record<
+    string,
+    string
+  >
   try {
+    console.log('event body----->', event.body)
     const user = await db.user.create({
       data: { email, externalId: sub, userName: email, picture },
     })
