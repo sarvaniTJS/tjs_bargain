@@ -14,7 +14,7 @@ export const schema = gql`
   }
 
   type Query {
-    bargains: [Bargain!]! @skipAuth
+    bargains(product: String): [Bargain!]! @skipAuth
     bargain(id: Int!): Bargain @skipAuth
   }
 

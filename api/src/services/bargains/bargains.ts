@@ -6,8 +6,15 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const bargains: QueryResolvers['bargains'] = () => {
-  return db.bargain.findMany()
+export const bargains: QueryResolvers['bargains'] = ({ product }) => {
+  return db.bargain.findMany({
+    where: {
+      product: {
+        contains: product,
+        mode: 'insensitive',
+      },
+    },
+  })
 }
 
 export const bargain: QueryResolvers['bargain'] = ({ id }) => {
@@ -58,6 +65,6 @@ export const Bargain: BargainRelationResolvers = {
     return db.bargain.findUnique({ where: { id: root?.id } }).comments()
   },
   user: (_obj, { root }) => {
-    return db.bargain.findUnique({ where: { id: root.id } }).user()
+    return db.bargain.findUnique({ where: { id: root?.id } }).user()
   },
 }

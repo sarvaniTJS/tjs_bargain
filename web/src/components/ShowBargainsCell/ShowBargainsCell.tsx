@@ -4,8 +4,8 @@ import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query ShowBargainsQuery {
-    showBargains: bargains {
+  query ShowBargainsQuery($product: String) {
+    showBargains: bargains(product: $product) {
       id
       product
       description
