@@ -5,6 +5,8 @@ import type {
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import { useAuth } from 'src/auth'
+
 import CommentCell from '../CommentCell/CommentCell'
 import CommentForm from '../CommentForm/CommentForm'
 import VoteForm from '../VoteForm/VoteForm'
@@ -32,12 +34,14 @@ export const Failure = ({
 export const Success = ({
   showBargain,
 }: CellSuccessProps<FindShowBargainQuery, FindShowBargainQueryVariables>) => {
+  const { isAuthenticated } = useAuth()
+
   return (
     <div>
       <h2>{showBargain.product}</h2>
       <p>{showBargain.description}</p>
-      <VoteForm bargainId={showBargain.id} />
-      <CommentForm bargainId={showBargain.id} />
+      {isAuthenticated && <VoteForm bargainId={showBargain.id} />}
+      {isAuthenticated && <CommentForm bargainId={showBargain.id} />}
       <CommentCell bargainId={showBargain.id} />
     </div>
   )
