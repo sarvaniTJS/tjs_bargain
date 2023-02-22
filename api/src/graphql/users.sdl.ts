@@ -9,10 +9,6 @@ export const schema = gql`
   }
 
   type Query {
-    users: [User!]! @requireAuth
-  }
-
-  input UpdateUserInput {
-    userName: String
+    users: [User!]! @skipAuth
   }
 `

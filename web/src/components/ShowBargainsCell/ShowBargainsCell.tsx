@@ -9,6 +9,9 @@ export const QUERY = gql`
       id
       product
       description
+      user {
+        userName
+      }
     }
   }
 `
@@ -31,6 +34,7 @@ export const Success = ({
         return (
           <li key={item.id}>
             <Link to={routes.showBargain({ id: item.id })}>{item.product}</Link>
+            <p>{item.user.userName}</p>
             <p>{item.description}</p>
           </li>
         )

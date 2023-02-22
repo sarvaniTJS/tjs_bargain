@@ -57,4 +57,7 @@ export const Bargain: BargainRelationResolvers = {
   comments: (_obj, { root }) => {
     return db.bargain.findUnique({ where: { id: root?.id } }).comments()
   },
+  user: (_obj, { root }) => {
+    return db.bargain.findUnique({ where: { id: root.id } }).user()
+  },
 }
