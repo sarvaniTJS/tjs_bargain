@@ -5,6 +5,8 @@ export const schema = gql`
     active: Boolean!
     bargain: Bargain!
     bargainId: Int!
+    userId: Int!
+    user: User!
     createdAt: DateTime!
   }
 
@@ -17,6 +19,7 @@ export const schema = gql`
     comment: String!
     active: Boolean!
     bargainId: Int!
+    externalId: String!
   }
 
   input UpdateCommentInput {

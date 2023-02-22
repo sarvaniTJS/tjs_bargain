@@ -5,6 +5,7 @@ import type {
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import CommentForm from '../CommentForm/CommentForm'
 import VoteForm from '../VoteForm/VoteForm'
 
 export const QUERY = gql`
@@ -35,6 +36,7 @@ export const Success = ({
       <h2>{showBargain.product}</h2>
       <p>{showBargain.description}</p>
       <VoteForm bargainId={showBargain.id} />
+      <CommentForm bargainId={showBargain.id} />
     </div>
   )
 }

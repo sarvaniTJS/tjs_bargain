@@ -16,11 +16,21 @@ export const comment: QueryResolvers['comment'] = ({ id }) => {
   })
 }
 
-export const createComment: MutationResolvers['createComment'] = ({
+export const createComment: MutationResolvers['createComment'] = async ({
   input,
 }) => {
+  const user = await db.user.findUnique({
+    where: {
+      externalId: input.externalId,
+    },
+  })
   return db.comment.create({
-    data: input,
+    data: {
+      comment: input.comment,
+      active: input.active,
+      bargainId: input.bargainId,
+      userId: user.id,
+    },
   })
 }
 

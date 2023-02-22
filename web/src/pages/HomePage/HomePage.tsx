@@ -5,12 +5,13 @@ import { useAuth } from 'src/auth'
 import ShowBargainsCell from 'src/components/ShowBargainsCell'
 
 const HomePage = () => {
-  const { isAuthenticated, logOut, logIn } = useAuth()
+  const { isAuthenticated, logOut, logIn, userMetadata } = useAuth()
   return (
     <>
       <MetaTags title="Home" description="Home page" />
 
       <h1>TJS Bargain</h1>
+      {isAuthenticated && <p>Hello {userMetadata.email}</p>}
       {isAuthenticated ? (
         <button onClick={logOut}>Log out</button>
       ) : (
