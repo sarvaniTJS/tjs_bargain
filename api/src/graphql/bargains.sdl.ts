@@ -5,6 +5,8 @@ export const schema = gql`
     description: String!
     active: Boolean!
     votes: [Vote]!
+    upvoteCount: Int!
+    downvoteCount: Int!
     comments: [Comment]!
     userId: Int!
     user: User!
@@ -27,6 +29,8 @@ export const schema = gql`
     product: String
     description: String
     active: Boolean
+    upvoteCount: Int
+    downvoteCount: Int
   }
 
   type Mutation {

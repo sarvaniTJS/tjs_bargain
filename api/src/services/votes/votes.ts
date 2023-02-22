@@ -19,18 +19,37 @@ export const vote: QueryResolvers['vote'] = ({ id }) => {
 export const createVote: MutationResolvers['createVote'] = async ({
   input,
 }) => {
-  const user = await db.user.findUnique({
-    where: {
-      externalId: input.externalId,
-    },
-  })
-  return db.vote.create({
-    data: {
-      vote: input.vote,
-      active: input.active,
-      bargainId: input.bargainId,
-      userId: user.id,
-    },
+  return await db.$transaction(async (tx) => {
+    const user = await tx.user.findUnique({
+      where: {
+        externalId: input.externalId,
+      },
+    })
+    const bargain = await tx.bargain.findUnique({
+      where: { id: input.bargainId },
+    })
+    if (input.vote === 'UPVOTE') {
+      const upvoteCount = bargain.upvoteCount + 1
+      await tx.bargain.update({
+        data: { upvoteCount },
+        where: { id: input.bargainId },
+      })
+    }
+    if (input.vote === 'DOWNVOTE') {
+      const downvoteCount = bargain.downvoteCount + 1
+      await tx.bargain.update({
+        data: { downvoteCount },
+        where: { id: input.bargainId },
+      })
+    }
+    return await tx.vote.create({
+      data: {
+        vote: input.vote,
+        active: input.active,
+        bargainId: input.bargainId,
+        userId: user.id,
+      },
+    })
   })
 }
 

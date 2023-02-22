@@ -17,6 +17,8 @@ export const QUERY = gql`
       id
       product
       description
+      upvoteCount
+      downvoteCount
     }
   }
 `
@@ -41,6 +43,8 @@ export const Success = ({
       <h2>{showBargain.product}</h2>
       <p>{showBargain.description}</p>
       {isAuthenticated && <VoteForm bargainId={showBargain.id} />}
+      <p>Upvotes: {showBargain.upvoteCount}</p>
+      <p>Downvotes: {showBargain.downvoteCount}</p>
       {isAuthenticated && <CommentForm bargainId={showBargain.id} />}
       <CommentCell bargainId={showBargain.id} />
     </div>

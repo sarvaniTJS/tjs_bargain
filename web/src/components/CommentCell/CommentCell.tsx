@@ -30,7 +30,7 @@ export const Success = ({
   return (
     <>
       {comments.map((comment) => (
-        <div>
+        <div key={comment.id}>
           <h5>{comment.user.userName}</h5>
           <p>{comment.comment}</p>
         </div>
