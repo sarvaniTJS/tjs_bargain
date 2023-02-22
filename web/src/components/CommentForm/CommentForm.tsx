@@ -13,6 +13,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
+import { QUERY as FindCommentQuery } from 'src/components/CommentCell'
 
 const CREATE = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {
@@ -42,6 +43,7 @@ const CommentForm = ({ bargainId }: Props) => {
       formMethods.reset()
       toast.success('Thank you for your comment!')
     },
+    refetchQueries: [{ query: FindCommentQuery, variables: { bargainId } }],
   })
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {

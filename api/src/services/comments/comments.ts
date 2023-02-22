@@ -6,8 +6,10 @@ import type {
 
 import { db } from 'src/lib/db'
 
-export const comments: QueryResolvers['comments'] = () => {
-  return db.comment.findMany()
+export const comments: QueryResolvers['comments'] = ({ bargainId }) => {
+  return db.comment.findMany({
+    where: { bargainId },
+  })
 }
 
 export const comment: QueryResolvers['comment'] = ({ id }) => {
@@ -53,5 +55,8 @@ export const deleteComment: MutationResolvers['deleteComment'] = ({ id }) => {
 export const Comment: CommentRelationResolvers = {
   bargain: (_obj, { root }) => {
     return db.comment.findUnique({ where: { id: root?.id } }).bargain()
+  },
+  user: (_obj, { root }) => {
+    return db.comment.findUnique({ where: { id: root.id } }).user()
   },
 }

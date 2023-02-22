@@ -5,6 +5,7 @@ import type {
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import CommentCell from '../CommentCell/CommentCell'
 import CommentForm from '../CommentForm/CommentForm'
 import VoteForm from '../VoteForm/VoteForm'
 
@@ -37,6 +38,7 @@ export const Success = ({
       <p>{showBargain.description}</p>
       <VoteForm bargainId={showBargain.id} />
       <CommentForm bargainId={showBargain.id} />
+      <CommentCell bargainId={showBargain.id} />
     </div>
   )
 }
