@@ -16,7 +16,10 @@ const Comment = ({ comment, bargainId }) => {
         view replies
       </button>
       {showForm === comment.id && (
-        <CommentForm bargainId={bargainId.id} parentCommentId={comment.id} />
+        <>
+          <CommentForm bargainId={bargainId.id} parentCommentId={comment.id} />
+          <CommentCell parentCommentId={comment.id} />
+        </>
       )}
       {showChildComments === comment.id && (
         <CommentCell parentCommentId={comment.id} />

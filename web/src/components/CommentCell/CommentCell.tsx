@@ -1,11 +1,8 @@
-import { useState } from 'react'
-
 import type { FindCommentQuery, FindCommentQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Comment from '../Comment/Comment'
-import CommentForm from '../CommentForm/CommentForm'
 
 export const QUERY = gql`
   query FindCommentQuery($parentCommentId: Int!) {

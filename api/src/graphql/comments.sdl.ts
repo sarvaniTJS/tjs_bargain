@@ -9,7 +9,7 @@ export const schema = gql`
     user: User!
     parentCommentId: Int
     parentComment: Comment
-    childComments: [Comment]
+    childComments: [Comment!]
     createdAt: DateTime!
   }
 

@@ -23,10 +23,12 @@ export const QUERY = gql`
         id
         comment
         parentCommentId
-        childComments {
+        parentComment {
           id
           comment
-          parentCommentId
+        }
+        childComments {
+          id
         }
         user {
           userName
@@ -65,10 +67,9 @@ export const Success = ({
       {showBargain.comments.map((comment) => {
         if (comment.parentCommentId === null) {
           return (
-            <>
-
+            <div key={comment.id}>
               <Comment comment={comment} bargainId={showBargain} />
-            </>
+            </div>
           )
         }
       })}
