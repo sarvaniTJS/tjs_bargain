@@ -45,8 +45,11 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
       toast.success('Thank you for your comment!')
     },
     refetchQueries: [
-      { query: FindCommentQuery, variables: { parentCommentId } },
-      { query: FindShowBargainQuery, variables: { bargainId } },
+      { query: FindShowBargainQuery, variables: { id: bargainId } },
+      {
+        query: FindCommentQuery,
+        variables: { parentCommentId: parentCommentId },
+      },
     ],
   })
 
@@ -63,7 +66,6 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
       },
     })
   }
-
   return (
     <>
       <Toaster />
