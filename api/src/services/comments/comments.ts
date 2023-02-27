@@ -12,6 +12,14 @@ export const comments: QueryResolvers['comments'] = ({ bargainId }) => {
   })
 }
 
+export const childComments: QueryResolvers['comments'] = ({
+  parentCommentId,
+}) => {
+  return db.comment.findMany({
+    where: { parentCommentId },
+  })
+}
+
 export const comment: QueryResolvers['comment'] = ({ id }) => {
   return db.comment.findUnique({
     where: { id },
@@ -31,6 +39,7 @@ export const createComment: MutationResolvers['createComment'] = async ({
       comment: input.comment,
       active: input.active,
       bargainId: input.bargainId,
+      parentCommentId: input.parentCommentId,
       userId: user.id,
     },
   })

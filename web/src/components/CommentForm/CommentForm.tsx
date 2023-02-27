@@ -14,6 +14,7 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindCommentQuery } from 'src/components/CommentCell'
+import { QUERY as FindShowBargainQuery } from 'src/components/ShowBargainCell'
 
 const CREATE = gql`
   mutation CreateCommentMutation($input: CreateCommentInput!) {
@@ -34,7 +35,7 @@ interface Props {
   postId: number
 }
 
-const CommentForm = ({ bargainId }: Props) => {
+const CommentForm = ({ bargainId, parentCommentId }: Props) => {
   const { userMetadata } = useAuth()
   const formMethods = useForm()
 
@@ -43,7 +44,10 @@ const CommentForm = ({ bargainId }: Props) => {
       formMethods.reset()
       toast.success('Thank you for your comment!')
     },
-    refetchQueries: [{ query: FindCommentQuery, variables: { bargainId } }],
+    refetchQueries: [
+      { query: FindCommentQuery, variables: { parentCommentId } },
+      { query: FindShowBargainQuery, variables: { bargainId } },
+    ],
   })
 
   const onSubmit: SubmitHandler<FormValues> = (input) => {
@@ -53,6 +57,7 @@ const CommentForm = ({ bargainId }: Props) => {
           bargainId,
           active: true,
           externalId: userMetadata.sub,
+          parentCommentId,
           ...input,
         },
       },
@@ -63,7 +68,6 @@ const CommentForm = ({ bargainId }: Props) => {
     <>
       <Toaster />
 
-      <h3>Leave a Comment</h3>
       <Form onSubmit={onSubmit} formMethods={formMethods}>
         <FormError error={error} />
 

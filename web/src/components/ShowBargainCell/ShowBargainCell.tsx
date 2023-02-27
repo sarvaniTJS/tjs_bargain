@@ -7,7 +7,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import { useAuth } from 'src/auth'
 
-import CommentCell from '../CommentCell/CommentCell'
+import Comment from '../Comment/Comment'
 import CommentForm from '../CommentForm/CommentForm'
 import VoteForm from '../VoteForm/VoteForm'
 
@@ -19,6 +19,19 @@ export const QUERY = gql`
       description
       upvoteCount
       downvoteCount
+      comments {
+        id
+        comment
+        parentCommentId
+        childComments {
+          id
+          comment
+          parentCommentId
+        }
+        user {
+          userName
+        }
+      }
     }
   }
 `
@@ -45,8 +58,20 @@ export const Success = ({
       {isAuthenticated && <VoteForm bargainId={showBargain.id} />}
       <p>Upvotes: {showBargain.upvoteCount}</p>
       <p>Downvotes: {showBargain.downvoteCount}</p>
-      {isAuthenticated && <CommentForm bargainId={showBargain.id} />}
-      <CommentCell bargainId={showBargain.id} />
+      <div>Comments</div>
+      {isAuthenticated && (
+        <CommentForm bargainId={showBargain.id} parentCommentId={null} />
+      )}
+      {showBargain.comments.map((comment) => {
+        if (comment.parentCommentId === null) {
+          return (
+            <>
+
+              <Comment comment={comment} bargainId={showBargain} />
+            </>
+          )
+        }
+      })}
     </div>
   )
 }

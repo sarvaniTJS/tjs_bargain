@@ -7,11 +7,15 @@ export const schema = gql`
     bargainId: Int!
     userId: Int!
     user: User!
+    parentCommentId: Int
+    parentComment: Comment
+    childComments: [Comment]
     createdAt: DateTime!
   }
 
   type Query {
     comments(bargainId: Int!): [Comment!]! @skipAuth
+    childComments(parentCommentId: Int!): [Comment!]! @skipAuth
     comment(id: Int!): Comment @skipAuth
   }
 
@@ -20,6 +24,7 @@ export const schema = gql`
     active: Boolean!
     bargainId: Int!
     externalId: String!
+    parentCommentId: Int
   }
 
   input UpdateCommentInput {

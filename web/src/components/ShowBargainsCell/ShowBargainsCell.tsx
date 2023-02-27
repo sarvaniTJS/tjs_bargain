@@ -32,8 +32,12 @@ export const Success = ({
       {showBargains.map((item) => {
         return (
           <li key={item.id}>
-            <Link to={routes.showBargain({ id: item.id })}>{item.product}</Link>
-            <p>{item.user.userName}</p>
+            <div>
+              <Link to={routes.showBargain({ id: item.id })}>
+                {item.product}
+              </Link>
+              {""} by {item.user.userName}
+            </div>
             <p>{item.description}</p>
           </li>
         )

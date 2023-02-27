@@ -1,12 +1,20 @@
+import { useState } from 'react'
+
 import type { FindCommentQuery, FindCommentQueryVariables } from 'types/graphql'
 
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
+import Comment from '../Comment/Comment'
+import CommentForm from '../CommentForm/CommentForm'
+
 export const QUERY = gql`
-  query FindCommentQuery($bargainId: Int!) {
-    comments: comments(bargainId: $bargainId) {
+  query FindCommentQuery($parentCommentId: Int!) {
+    comments: childComments(parentCommentId: $parentCommentId) {
       id
       comment
+      bargain {
+        id
+      }
       user {
         userName
       }
@@ -30,10 +38,11 @@ export const Success = ({
   return (
     <>
       {comments.map((comment) => (
-        <div key={comment.id}>
-          <h5>{comment.user.userName}</h5>
-          <p>{comment.comment}</p>
-        </div>
+        <ul key={comment.id}>
+          <li>
+            <Comment comment={comment} bargainId={comment.bargain} />
+          </li>
+        </ul>
       ))}
     </>
   )
