@@ -42,17 +42,22 @@ const Comment = ({ comment, bargainId }) => {
       deleteComment({ variables: { id } })
     }
   }
-  console.log(comment.user.externalId, userMetadata.sub)
+  const openCommentForm = () => {
+    setShowForm(comment.id)
+    setShowChildComments(false)
+  }
+  const openReplies = () => {
+    setShowChildComments(comment.id)
+    setShowForm(false)
+  }
   return (
     <>
       <Toaster />
       <p>
         {comment.user.userName}: {comment.comment}
       </p>
-      <button onClick={() => setShowForm(comment.id)}>Comment</button>
-      <button onClick={() => setShowChildComments(comment.id)}>
-        view replies
-      </button>
+      <button onClick={openCommentForm}>Comment</button>
+      <button onClick={openReplies}>view replies</button>
       {comment.user.externalId === userMetadata.sub && (
         <button onClick={() => onDeleteClick(comment.id)}>Delete</button>
       )}

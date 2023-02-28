@@ -36,9 +36,9 @@ export const Success = ({
               <Link to={routes.showBargain({ id: item.id })}>
                 {item.product}
               </Link>
-              {""} by {item.user.userName}
+              {''} by {item.user.userName}
             </div>
-            <p>{item.description}</p>
+            <p>{item.description.slice(0, 75)}...</p>
           </li>
         )
       })}
