@@ -18,7 +18,7 @@ model Bargain {
   upvoteCount       Int      @default(0)
   downvoteCount     Int      @default(0)
   comments          Comment[]
-  user              User     @relation(fields: [userId], references: [id])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
   createdAt         DateTime @default(now())
 }
@@ -27,12 +27,12 @@ model Comment {
   id                Int      @id @default(autoincrement())
   comment           String
   active            Boolean  @default(true)
-  bargain           Bargain  @relation(fields: [bargainId], references: [id])
+  bargain           Bargain  @relation(fields: [bargainId], references: [id], onDelete: Cascade)
   bargainId         Int
-  user              User     @relation(fields: [userId], references: [id])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
   parentCommentId   Int?
-  parentComment     Comment?  @relation("parentChild", fields:[parentCommentId], references:[id])
+  parentComment     Comment?  @relation("parentChild", fields:[parentCommentId], references:[id], onDelete: Cascade)
   childComments     Comment[] @relation("parentChild")
   createdAt         DateTime @default(now())
 }
@@ -41,9 +41,9 @@ model Vote {
   id                Int      @id @default(autoincrement())
   vote              VoteType
   active            Boolean  @default(true)
-  bargain           Bargain  @relation(fields: [bargainId], references: [id])
+  bargain           Bargain  @relation(fields: [bargainId], references: [id], onDelete: Cascade)
   bargainId         Int
-  user              User     @relation(fields: [userId], references: [id])
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
   createdAt         DateTime @default(now())
   @@unique([userId, bargainId])

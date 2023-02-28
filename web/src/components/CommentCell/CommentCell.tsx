@@ -12,8 +12,10 @@ export const QUERY = gql`
       bargain {
         id
       }
+      parentCommentId
       user {
         userName
+        externalId
       }
     }
   }
