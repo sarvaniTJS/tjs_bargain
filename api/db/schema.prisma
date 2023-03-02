@@ -18,6 +18,7 @@ model Bargain {
   upvoteCount       Int      @default(0)
   downvoteCount     Int      @default(0)
   comments          Comment[]
+  links             Link[]
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            Int
   createdAt         DateTime @default(now())
@@ -63,5 +64,14 @@ model User {
   bargains          Bargain[]
   votes             Vote[]
   comments          Comment[]
+  createdAt         DateTime @default(now())
+}
+
+
+model Link {
+  id                Int      @id @default(autoincrement())
+  bargain           Bargain  @relation(fields: [bargainId], references: [id], onDelete: Cascade)
+  bargainId         Int
+  link              String
   createdAt         DateTime @default(now())
 }

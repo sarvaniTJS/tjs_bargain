@@ -6,7 +6,6 @@ exports.handler = async function (event) {
     string
   >
   try {
-    console.log('event body----->', event.body)
     const user = await db.user.create({
       data: { email, externalId: sub, userName: email, picture },
     })
