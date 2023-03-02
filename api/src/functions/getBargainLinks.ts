@@ -48,14 +48,13 @@ exports.handler = async function (event) {
         })
       }
 
-      linkList.forEach(async (link) => {
-        const link = await tx.link.create({
-          data: { bargainId, link: link },
+      linkList.forEach(async (l) => {
+        await tx.link.create({
+          data: { bargainId, link: l },
         })
       })
       return {
         statusCode: 200,
-        body: JSON.stringify({ link }),
       }
     })
   } catch (error) {
