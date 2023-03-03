@@ -7,11 +7,13 @@ exports.handler = async function (event) {
   const bargain = await db.bargain.findUnique({
     where: { id: bargainId },
   })
-  console.log('bargain------->', bargain)
+  console.log('bargain------->', bargain.product)
   const start = Date.now()
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({ headless: false })
   const page = await browser.newPage()
-  await page.goto(`https://www.google.co.in/search?q=${bargain}&tbm=shop`)
+  await page.goto(
+    `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
+  )
 
   await page.waitForSelector('.SirUVb.sh-img__image')
   const goto = await page.evaluate(() => {
