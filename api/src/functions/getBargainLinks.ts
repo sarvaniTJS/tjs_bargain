@@ -6,7 +6,7 @@ exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
   const bargain = await db.bargain.findUnique({
     where: { id: bargainId },
-  }).product
+  })
   console.log('bargain------->', bargain)
   const start = Date.now()
   const browser = await puppeteer.launch({ headless: true })
