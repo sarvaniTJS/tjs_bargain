@@ -10,7 +10,7 @@ exports.handler = async function (event) {
   })
   console.log('bargain------->', bargain.product)
   const start = Date.now()
-  const browser = await puppeteer.launch({
+  const browser = await chromium.puppeteer.launch({
     // Required
     executablePath: await chromium.executablePath,
 
