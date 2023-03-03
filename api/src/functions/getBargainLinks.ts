@@ -1,4 +1,4 @@
-import chromium from 'chrome-aws-lambda'
+import chromium from '@sparticuz/chromium'
 import puppeteer from 'puppeteer-core'
 
 import { db } from 'src/lib/db'
@@ -10,7 +10,7 @@ exports.handler = async function (event) {
   })
   console.log('bargain------->', bargain.product)
   const start = Date.now()
-  const path = await chromium.executablePath
+  const path = await chromium.executablePath()
   console.log('path==========>', path)
   const browser = await puppeteer.launch({
     // Required
