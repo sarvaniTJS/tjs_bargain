@@ -1,4 +1,5 @@
-import puppeteer from 'puppeteer'
+import chromium from 'chrome-aws-lambda'
+import puppeteer from 'puppeteer-core'
 
 import { db } from 'src/lib/db'
 
@@ -9,7 +10,15 @@ exports.handler = async function (event) {
   })
   console.log('bargain------->', bargain.product)
   const start = Date.now()
-  const browser = await puppeteer.launch({ headless: false })
+  const browser = await puppeteer.launch({
+    // Required
+    executablePath: await chromium.executablePath,
+
+    // Optional
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
+    headless: chromium.headless,
+  })
   const page = await browser.newPage()
   await page.goto(
     `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
