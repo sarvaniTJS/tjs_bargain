@@ -1,6 +1,6 @@
-import { db } from 'src/lib/db'
+import puppeteer from 'puppeteer'
 
-const puppeteer = require('puppeteer')
+import { db } from 'src/lib/db'
 
 exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
