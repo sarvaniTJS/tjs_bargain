@@ -34,8 +34,8 @@ exports.handler = async function (event) {
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
   const linkList = await page.evaluate(() => {
-    return document.querySelector('.b5ycib.shntl').href
-    // const linkElements = Array.from(document.querySelectorAll('.b5ycib.shntl'))
+    // return document.querySelector('.b5ycib.shntl').href
+    return Array.from(document.querySelectorAll('.b5ycib.shntl'))
     // const links = linkElements.map((ele) => {
     //   return ele.href
     // })
