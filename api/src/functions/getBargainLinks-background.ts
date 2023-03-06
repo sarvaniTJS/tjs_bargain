@@ -1,7 +1,7 @@
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
 
-const { db } = require('src/lib/db')
+const { db } = require('../lib/db')
 
 exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
