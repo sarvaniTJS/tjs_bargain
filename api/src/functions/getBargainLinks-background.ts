@@ -26,9 +26,9 @@ exports.handler = async function (event) {
     `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
   )
 
-  await page.waitForSelector('.SirUVb.sh-img__image')
+  await page.waitForSelector('a.iXEZD')
   const goto = await page.evaluate(() => {
-    return document.querySelector('.iXEZD').href
+    return document.querySelector('a.iXEZD').href
   })
   console.log('gotolink', goto)
   await page.goto(goto)
