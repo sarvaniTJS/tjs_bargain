@@ -1,7 +1,7 @@
-import { db } from 'src/lib/db'
-
 const chromium = require('@sparticuz/chromium')
 const puppeteer = require('puppeteer-core')
+
+const { db } = require('src/lib/db')
 
 exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
@@ -42,6 +42,7 @@ exports.handler = async function (event) {
     })
     return links
   })
+  console.log('linkList------>', linkList)
   await browser.close()
 
   const end = Date.now()
