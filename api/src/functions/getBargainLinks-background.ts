@@ -26,7 +26,7 @@ exports.handler = async function (event) {
     `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
   )
 
-  await page.waitForSelector('a.iXEZD')
+  await page.waitForSelector('.iXEZD')
   const goto = await page.evaluate(() => {
     return document.querySelector('a.iXEZD').href
   })
