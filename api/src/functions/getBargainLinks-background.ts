@@ -1,7 +1,7 @@
-import chromium from '@sparticuz/chromium'
-import puppeteer from 'puppeteer-core'
-
 import { db } from 'src/lib/db'
+
+const chromium = require('@sparticuz/chromium')
+const puppeteer = require('puppeteer-core')
 
 exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
