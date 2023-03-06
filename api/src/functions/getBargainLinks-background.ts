@@ -34,7 +34,9 @@ exports.handler = async function (event) {
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
   const linkList = await page.evaluate(() => {
+    console.log('evaluate')
     const linkElements = Array.from(document.querySelectorAll('.b5ycib.shntl'))
+    console.log('linkElements----->', linkElements)
     const links = linkElements.map((ele) => {
       const rawUrl = ele.href.slice(31)
       const url = rawUrl.split('%')
