@@ -6,6 +6,7 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 import { QUERY as FindCommentQuery } from 'src/components/CommentCell'
 import { QUERY as FindShowBargainQuery } from 'src/components/ShowBargainCell'
+import { isAuthenticated } from 'src/lib/auth'
 
 import CommentCell from '../CommentCell/CommentCell'
 import CommentForm from '../CommentForm/CommentForm'
@@ -24,7 +25,7 @@ function classNames(...classes) {
 const Comment = ({ comment, bargainId, reviewIdx }) => {
   const [showForm, setShowForm] = useState(false)
   const [showChildComments, setShowChildComments] = useState(false)
-  const { userMetadata } = useAuth()
+  const { userMetadata, isAuthenticated } = useAuth()
   const [deleteComment] = useMutation(DELETE_COMMENT_MUTATION, {
     onCompleted: () => {
       toast.success('Comment deleted')
@@ -85,14 +86,15 @@ const Comment = ({ comment, bargainId, reviewIdx }) => {
             <button className="px-3" onClick={openReplies}>
               view replies
             </button>
-            {comment.user.externalId === userMetadata.sub && (
-              <button
-                className="px-3"
-                onClick={() => onDeleteClick(comment.id)}
-              >
-                Delete
-              </button>
-            )}
+            {isAuthenticated &&
+              comment.user.externalId === userMetadata.sub && (
+                <button
+                  className="px-3"
+                  onClick={() => onDeleteClick(comment.id)}
+                >
+                  Delete
+                </button>
+              )}
           </div>
           <div />
           {showForm === comment.id && (
