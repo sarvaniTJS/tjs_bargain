@@ -12,12 +12,15 @@ import { Set, Router, Route, Private } from '@redwoodjs/router'
 import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
+import NavbarLayout from './layouts/NavbarLayout/NavbarLayout'
 
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Route path="/show-bargain/{id:Int}" page={ShowBargainPage} name="showBargain" />
-      <Route path="/" page={HomePage} name="home" />
+      <Set wrap={NavbarLayout}>
+        <Route path="/show-bargain/{id:Int}" page={ShowBargainPage} name="showBargain" />
+        <Route path="/" page={HomePage} name="home" />
+      </Set>
       <Private unauthenticated="home">
         <Set wrap={ScaffoldLayout} title="Bargains" titleTo="bargains" buttonLabel="New Bargain" buttonTo="newBargain">
           <Route path="/bargains/new" page={BargainNewBargainPage} name="newBargain" />
