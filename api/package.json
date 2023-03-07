@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "dependencies": {
-    "@redwoodjs/api": "4.1.4",
-    "@redwoodjs/auth-auth0-api": "4.1.4",
-    "@redwoodjs/graphql-server": "4.1.4",
+    "@redwoodjs/api": "4.2.2",
+    "@redwoodjs/auth-auth0-api": "4.2.2",
+    "@redwoodjs/graphql-server": "4.2.2",
     "@sparticuz/chromium": "111",
     "puppeteer-core": "^19.7.2"
   }
