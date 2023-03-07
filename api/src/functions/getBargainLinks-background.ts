@@ -56,13 +56,16 @@ exports.handler = async function (event) {
           bargainId,
         },
       })
+      console.log('existingLink====>', existingLink)
       if (existingLink !== null) {
-        tx.link.deleteMany({
+        const delLink = tx.link.deleteMany({
           where: {
             bargainId,
           },
         })
+        console.log('delLink=======>', delLink)
       }
+
       await tx.link.create({
         data: { bargainId, link: linkNodeList },
       })
