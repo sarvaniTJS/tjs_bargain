@@ -13,6 +13,7 @@ import ScaffoldLayout from 'src/layouts/ScaffoldLayout'
 
 import { useAuth } from './auth'
 import NavbarLayout from './layouts/NavbarLayout/NavbarLayout'
+import UserNavLayout from './layouts/UserNavLayout/UserNavLayout'
 
 const Routes = () => {
   return (
@@ -22,7 +23,7 @@ const Routes = () => {
         <Route path="/" page={HomePage} name="home" />
       </Set>
       <Private unauthenticated="home">
-        <Set wrap={ScaffoldLayout} title="Bargains" titleTo="bargains" buttonLabel="New Bargain" buttonTo="newBargain">
+        <Set wrap={UserNavLayout} title="Bargains" titleTo="bargains" buttonLabel="New Bargain" buttonTo="newBargain">
           <Route path="/bargains/new" page={BargainNewBargainPage} name="newBargain" />
           <Route path="/bargains/{id:Int}/edit" page={BargainEditBargainPage} name="editBargain" />
           <Route path="/bargains/{id:Int}" page={BargainBargainPage} name="bargain" />
