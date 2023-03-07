@@ -8,6 +8,7 @@ export const QUERY = gql`
   query FindCommentQuery($parentCommentId: Int!) {
     comments: childComments(parentCommentId: $parentCommentId) {
       id
+      createdAt
       comment
       bargain {
         id
@@ -20,6 +21,9 @@ export const QUERY = gql`
     }
   }
 `
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
 export const Loading = () => <div>Loading...</div>
 
@@ -36,13 +40,22 @@ export const Success = ({
 }: CellSuccessProps<FindCommentQuery, FindCommentQueryVariables>) => {
   return (
     <>
-      {comments.map((comment) => (
-        <ul key={comment.id}>
-          <li>
-            <Comment comment={comment} bargainId={comment.bargain} />
-          </li>
-        </ul>
-      ))}
+      <div className="bg-white">
+        <div>
+          <h2 className="sr-only">Customer Reviews</h2>
+
+          <div>
+            {comments.map((comment, reviewIdx) => (
+              <Comment
+                key={comment.id}
+                comment={comment}
+                bargainId={comment.bargain}
+                reviewIdx={reviewIdx}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

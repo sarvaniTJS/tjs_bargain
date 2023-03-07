@@ -17,8 +17,11 @@ const DELETE_COMMENT_MUTATION = gql`
     }
   }
 `
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
+}
 
-const Comment = ({ comment, bargainId }) => {
+const Comment = ({ comment, bargainId, reviewIdx }) => {
   const [showForm, setShowForm] = useState(false)
   const [showChildComments, setShowChildComments] = useState(false)
   const { userMetadata } = useAuth()
@@ -53,23 +56,65 @@ const Comment = ({ comment, bargainId }) => {
   return (
     <>
       <Toaster />
-      <p>
-        {comment.user.userName}: {comment.comment}
-      </p>
-      <button onClick={openCommentForm}>Comment</button>
-      <button onClick={openReplies}>view replies</button>
-      {comment.user.externalId === userMetadata.sub && (
-        <button onClick={() => onDeleteClick(comment.id)}>Delete</button>
-      )}
-      {showForm === comment.id && (
-        <>
-          <CommentForm bargainId={bargainId.id} parentCommentId={comment.id} />
-          <CommentCell parentCommentId={comment.id} />
-        </>
-      )}
-      {showChildComments === comment.id && (
-        <CommentCell parentCommentId={comment.id} />
-      )}
+      <div className="flex space-x-4 text-sm text-gray-500">
+        <div className="flex-none py-5">
+          <img
+            src="https://s.gravatar.com/avatar/422d7242d6a1a55e64842f4be6c05c0b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
+            alt=""
+            className="h-10 w-10 rounded-full bg-gray-100"
+          />
+        </div>
+        <div
+          className={classNames(
+            reviewIdx === 0 ? '' : 'border-t border-gray-200',
+            'flex-1 py-5'
+          )}
+        >
+          <h3 className="font-medium text-gray-900">{comment.user.userName}</h3>
+          {/* <p>
+                    <time dateTime={review.datetime}>{review.date}</time>
+                  </p> */}
+          <div className="prose prose-sm mt-4 max-w-none text-gray-500">
+            {comment.comment}
+          </div>
+
+          <div className="mt-6">
+            <button className="pr-3" onClick={openCommentForm}>
+              Comment
+            </button>
+            <button className="px-3" onClick={openReplies}>
+              view replies
+            </button>
+            {comment.user.externalId === userMetadata.sub && (
+              <button
+                className="px-3"
+                onClick={() => onDeleteClick(comment.id)}
+              >
+                Delete
+              </button>
+            )}
+          </div>
+          <div />
+          {showForm === comment.id && (
+            <>
+              <div className="mt-6">
+                <CommentForm
+                  bargainId={bargainId.id}
+                  parentCommentId={comment.id}
+                />
+              </div>
+              <div className="mt-4">
+                <CommentCell parentCommentId={comment.id} />
+              </div>
+            </>
+          )}
+          <div className="mt-6">
+            {showChildComments === comment.id && (
+              <CommentCell parentCommentId={comment.id} />
+            )}
+          </div>
+        </div>
+      </div>
     </>
   )
 }

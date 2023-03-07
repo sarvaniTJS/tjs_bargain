@@ -103,18 +103,23 @@ export const Success = ({
           />
         </div>
       )}
-      {isAuthenticated && (
-        <CommentForm bargainId={showBargain.id} parentCommentId={null} />
-      )}
-      {showBargain.comments.map((comment) => {
-        if (comment.parentCommentId === null) {
-          return (
-            <div key={comment.id}>
-              <Comment comment={comment} bargainId={showBargain} />
-            </div>
-          )
-        }
-      })}
+      <div className="mt-6">
+        {isAuthenticated && (
+          <CommentForm bargainId={showBargain.id} parentCommentId={null} />
+        )}
+      </div>
+
+      <div className="mt-6">
+        {showBargain.comments.map((comment) => {
+          if (comment.parentCommentId === null) {
+            return (
+              <div key={comment.id}>
+                <Comment comment={comment} bargainId={showBargain} />
+              </div>
+            )
+          }
+        })}
+      </div>
     </div>
   )
 }
