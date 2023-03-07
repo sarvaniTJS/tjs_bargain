@@ -64,7 +64,6 @@ export const Success = ({
   showBargain,
 }: CellSuccessProps<FindShowBargainQuery, FindShowBargainQueryVariables>) => {
   const { isAuthenticated } = useAuth()
-
   return (
     <div>
       <div className="lg:flex lg:items-center lg:justify-between">
@@ -94,10 +93,16 @@ export const Success = ({
       <p className="mt-6 text-l text-gray-700 leading-8">
         {showBargain.description}
       </p>
-      {isAuthenticated && <VoteForm bargainId={showBargain.id} />}
-      <p>Upvotes: {showBargain.upvoteCount}</p>
-      <p>Downvotes: {showBargain.downvoteCount}</p>
-      <div>Comments</div>
+
+      {isAuthenticated && (
+        <div className="mt-6">
+          <VoteForm
+            bargainId={showBargain.id}
+            upvotes={showBargain.upvoteCount}
+            downvotes={showBargain.downvoteCount}
+          />
+        </div>
+      )}
       {isAuthenticated && (
         <CommentForm bargainId={showBargain.id} parentCommentId={null} />
       )}
