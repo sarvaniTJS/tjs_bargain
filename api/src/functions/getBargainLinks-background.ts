@@ -34,8 +34,8 @@ exports.handler = async function (event) {
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
   const linkNodeList = await page.evaluate(() => {
-    // return document.querySelector('.b5ycib.shntl').href
-    return document.querySelectorAll('.b5ycib.shntl')
+    return document.querySelector('.b5ycib.shntl').href
+    // return document.querySelectorAll('.b5ycib.shntl')
     // const links = linkElements.map((ele) => {
     //   return ele.href
     // })
@@ -49,37 +49,37 @@ exports.handler = async function (event) {
   const end = Date.now()
   const timeTaken = end - start
   console.log(`seconds elapsed = ${Math.floor(timeTaken / 1000)}`)
-  // try {
-  //   await db.$transaction(async (tx) => {
-  //     const existingLink = await tx.link.findFirst({
-  //       where: {
-  //         bargainId,
-  //       },
-  //     })
-  //     if (existingLink !== null) {
-  //       tx.link.deleteMany({
-  //         where: {
-  //           bargainId,
-  //         },
-  //       })
-  //     }
-  //     await tx.link.create({
-  //       data: { bargainId, link: linkList },
-  //     })
+  try {
+    await db.$transaction(async (tx) => {
+      const existingLink = await tx.link.findFirst({
+        where: {
+          bargainId,
+        },
+      })
+      if (existingLink !== null) {
+        tx.link.deleteMany({
+          where: {
+            bargainId,
+          },
+        })
+      }
+      await tx.link.create({
+        data: { bargainId, link: linkList },
+      })
 
-  //     // linkList.forEach(async (l) => {
-  //     //   await tx.link.create({
-  //     //     data: { bargainId, link: l },
-  //     //   })
-  //     // })
-  //     return {
-  //       statusCode: 200,
-  //     }
-  //   })
-  // } catch (error) {
-  //   return {
-  //     statusCode: 400,
-  //     body: JSON.stringify({ error: error.message }),
-  //   }
-  // }
+      // linkList.forEach(async (l) => {
+      //   await tx.link.create({
+      //     data: { bargainId, link: l },
+      //   })
+      // })
+      return {
+        statusCode: 200,
+      }
+    })
+  } catch (error) {
+    return {
+      statusCode: 400,
+      body: JSON.stringify({ error: error.message }),
+    }
+  }
 }
