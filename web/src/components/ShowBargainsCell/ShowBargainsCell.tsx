@@ -31,7 +31,11 @@ export const Success = ({
     <ul className="divide-y divide-gray-200">
       {showBargains.map((item) => (
         <li key={item.id} className="flex py-4">
-          {/* <img className="h-10 w-10 rounded-full" src={person.image} alt="" /> */}
+          <img
+            className="h-10 w-10 rounded-full"
+            src="https://s.gravatar.com/avatar/422d7242d6a1a55e64842f4be6c05c0b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
+            alt=""
+          />
           <div className="ml-3">
             <p className="text-sm font-medium text-gray-900">
               <Link to={routes.showBargain({ id: item.id })}>
