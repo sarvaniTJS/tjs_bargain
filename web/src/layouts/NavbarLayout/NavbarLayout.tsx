@@ -236,7 +236,7 @@ const NavbarLayout = ({ children }: NavbarLayoutProps) => {
           )}
         </Disclosure>
       </header>
-      <main>{children}</main>
+      <main className="p-10">{children}</main>
     </>
   )
 }

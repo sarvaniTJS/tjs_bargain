@@ -28,20 +28,25 @@ export const Success = ({
   showBargains,
 }: CellSuccessProps<ShowBargainsQuery>) => {
   return (
-    <ul>
-      {showBargains.map((item) => {
-        return (
-          <li key={item.id}>
-            <div>
+    <ul className="divide-y divide-gray-200">
+      {showBargains.map((item) => (
+        <li key={item.id} className="flex py-4">
+          {/* <img className="h-10 w-10 rounded-full" src={person.image} alt="" /> */}
+          <div className="ml-3">
+            <p className="text-sm font-medium text-gray-900">
               <Link to={routes.showBargain({ id: item.id })}>
                 {item.product}
-              </Link>
-              {''} by {item.user.userName}
-            </div>
-            <p>{item.description.slice(0, 75)}...</p>
-          </li>
-        )
-      })}
+              </Link>{' '}
+              <span className="text-sm text-gray-500">
+                by {item.user.userName}
+              </span>
+            </p>
+            <p className="text-sm text-gray-500">
+              {item.description.slice(0, 75)}...
+            </p>
+          </div>
+        </li>
+      ))}
     </ul>
   )
 }
