@@ -80,10 +80,12 @@ const Comment = ({ comment, bargainId, reviewIdx }) => {
           </div>
 
           <div className="mt-6">
-            <button className="pr-3" onClick={openCommentForm}>
-              Comment
-            </button>
-            <button className="px-3" onClick={openReplies}>
+            {isAuthenticated && (
+              <button className="pr-3" onClick={openCommentForm}>
+                Comment
+              </button>
+            )}
+            <button className="pr-3" onClick={openReplies}>
               view replies
             </button>
             {isAuthenticated &&

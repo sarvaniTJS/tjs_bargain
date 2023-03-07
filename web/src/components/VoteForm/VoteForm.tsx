@@ -14,7 +14,7 @@ const CREATE = gql`
   }
 `
 const VoteForm = ({ bargainId, upvotes, downvotes }) => {
-  const { userMetadata } = useAuth()
+  const { userMetadata, isAuthenticated } = useAuth()
 
   const [createVote, { loading, error }] = useMutation(CREATE, {
     onError: () => {
@@ -28,6 +28,10 @@ const VoteForm = ({ bargainId, upvotes, downvotes }) => {
     ],
   })
   const upvote = () => {
+    if (!isAuthenticated) {
+      toast.error('Please Login to vote')
+      return
+    }
     createVote({
       variables: {
         input: {
@@ -40,6 +44,10 @@ const VoteForm = ({ bargainId, upvotes, downvotes }) => {
     })
   }
   const downvote = () => {
+    if (!isAuthenticated) {
+      toast.error('Please Login to vote')
+      return
+    }
     createVote({
       variables: {
         input: {
@@ -60,7 +68,6 @@ const VoteForm = ({ bargainId, upvotes, downvotes }) => {
         type="button"
         className="inline-flex items-center gap-x-1.5 rounded-md bg-green-50 py-1.5 px-2.5 text-sm font-semibold text-green-600 shadow-sm hover:bg-green-100"
       >
-        Upvote:
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
@@ -77,7 +84,6 @@ const VoteForm = ({ bargainId, upvotes, downvotes }) => {
         type="button"
         className="ml-2 inline-flex items-center gap-x-1.5 rounded-md bg-red-50 py-1.5 px-2.5 text-sm font-semibold text-red-600 shadow-sm hover:bg-red-100"
       >
-        Downvote:
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"

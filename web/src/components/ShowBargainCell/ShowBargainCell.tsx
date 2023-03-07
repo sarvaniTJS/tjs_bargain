@@ -94,15 +94,13 @@ export const Success = ({
         {showBargain.description}
       </p>
 
-      {isAuthenticated && (
-        <div className="mt-6">
-          <VoteForm
-            bargainId={showBargain.id}
-            upvotes={showBargain.upvoteCount}
-            downvotes={showBargain.downvoteCount}
-          />
-        </div>
-      )}
+      <div className="mt-6">
+        <VoteForm
+          bargainId={showBargain.id}
+          upvotes={showBargain.upvoteCount}
+          downvotes={showBargain.downvoteCount}
+        />
+      </div>
       <div className="mt-6">
         {isAuthenticated && (
           <CommentForm bargainId={showBargain.id} parentCommentId={null} />

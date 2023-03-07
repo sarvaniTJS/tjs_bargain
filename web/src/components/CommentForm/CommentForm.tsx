@@ -88,7 +88,7 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
                 Add your comment
               </Label>
               <TextAreaField
-                rows={3}
+                rows={2}
                 name="comment"
                 id="comment"
                 className="p-3 block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6"
