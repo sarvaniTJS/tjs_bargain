@@ -42,8 +42,8 @@ exports.handler = async function (event) {
     // return links
   })
   console.log('linkNodeList------>', linkNodeList)
-  const linkList = Array.from(linkNodeList)
-  console.log('linkList==========>', linkList)
+  // const linkList = Array.from(linkNodeList)
+  // console.log('linkList==========>', linkList)
   await browser.close()
 
   const end = Date.now()
@@ -64,7 +64,7 @@ exports.handler = async function (event) {
         })
       }
       await tx.link.create({
-        data: { bargainId, link: linkList },
+        data: { bargainId, link: linkNodeList },
       })
 
       // linkList.forEach(async (l) => {
