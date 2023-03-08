@@ -23,13 +23,14 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: test function`)
 
   try {
-    console.log('event body----->', event.body.event.user)
+    const body = JSON.parse(event.body)
+
     const user = await db.user.create({
       data: {
-        email: event.body.event.user.email,
-        userName: event.body.event.user.nickname,
-        picture: event.body.event.user.picture,
-        externalId: event.body.event.user.user_id,
+        email: body.event.user.email,
+        userName: body.event.user.nickname,
+        picture: body.event.user.picture,
+        externalId: body.event.user.user_id,
       },
     })
     return {
