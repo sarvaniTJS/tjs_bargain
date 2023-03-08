@@ -36,6 +36,7 @@ export const getCurrentUser = async (
   if (!decoded) {
     return null
   }
+  console.log(decoded)
 
   return await db.user.findUnique({
     where: { externalId: decoded.sub },
