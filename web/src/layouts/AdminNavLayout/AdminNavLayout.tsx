@@ -10,11 +10,12 @@ import { useAuth } from 'src/auth'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-type UserNavLayoutProps = {
+
+type AdminNavLayoutProps = {
   children?: React.ReactNode
 }
 
-const UserNavLayout = ({ children }: UserNavLayoutProps) => {
+const AdminNavLayout = ({ children }: AdminNavLayoutProps) => {
   const { isAuthenticated, logOut, logIn, userMetadata } = useAuth()
   const user = {
     name: isAuthenticated && userMetadata.nickname,
@@ -23,8 +24,8 @@ const UserNavLayout = ({ children }: UserNavLayoutProps) => {
   }
   console.log(routes)
   const navigation = [
-    { name: 'My Bargains', to: routes.bargains(), current: true },
-    { name: 'Create bargain', to: routes.newBargain(), current: false },
+    { name: 'User Details', to: routes.userDetails(), current: true },
+    { name: 'Bargain Deatails', to: routes.bargainDetails(), current: false },
     { name: 'Home', to: routes.home(), current: false },
   ]
   const userNavigation = [
@@ -225,4 +226,4 @@ const UserNavLayout = ({ children }: UserNavLayoutProps) => {
   )
 }
 
-export default UserNavLayout
+export default AdminNavLayout
