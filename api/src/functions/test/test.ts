@@ -23,6 +23,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: test function`)
 
   try {
+    console.log('event', event)
     const body = JSON.parse(event.body)
 
     const user = await db.user.create({
@@ -33,6 +34,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
         externalId: body.event.user.user_id,
       },
     })
+    console.log(user)
     return {
       statusCode: 200,
       body: JSON.stringify({ user }),
