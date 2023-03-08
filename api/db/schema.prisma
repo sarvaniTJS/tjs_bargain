@@ -62,7 +62,7 @@ model User {
   picture           String?
   userName          String
   active            Boolean  @default(true)
-  role              String   @default("user")
+  roles             String   @default("user")
   bargains          Bargain[]
   votes             Vote[]
   comments          Comment[]

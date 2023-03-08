@@ -19,10 +19,12 @@ import UserNavLayout from './layouts/UserNavLayout/UserNavLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
-      <Set wrap={AdminNavLayout}>
-        <Route path="/bargain-details" page={BargainDetailsPage} name="bargainDetails" />
-        <Route path="/user-details" page={UserDetailsPage} name="userDetails" />
-      </Set>
+      <Private unauthenticated="home" roles="admin">
+        <Set wrap={AdminNavLayout}>
+          <Route path="/bargain-details" page={BargainDetailsPage} name="bargainDetails" />
+          <Route path="/user-details" page={UserDetailsPage} name="userDetails" />
+        </Set>
+      </Private>
       <Set wrap={NavbarLayout}>
         <Route path="/show-bargain/{id:Int}" page={ShowBargainPage} name="showBargain" />
         <Route path="/" page={HomePage} name="home" />

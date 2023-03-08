@@ -1,6 +1,7 @@
 import type { Decoded } from '@redwoodjs/api'
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
 
+import { db } from './db'
 /**
  * Represents the user attributes returned by the decoding the
  * Authentication provider's JWT together with an optional list of roles.
@@ -36,13 +37,18 @@ export const getCurrentUser = async (
     return null
   }
 
-  const roles = decoded[process.env.AUTH0_AUDIENCE + '/roles']
+  return await db.user.findUnique({
+    where: { externalId: decoded.sub },
+    select: { id: true, email: true, roles: true },
+  })
 
-  if (roles) {
-    return { ...decoded, roles }
-  }
+  // const roles = decoded[process.env.AUTH0_AUDIENCE + '/roles']
 
-  return { ...decoded }
+  // if (roles) {
+  //   return { ...decoded, roles }
+  // }
+
+  // return { ...decoded }
 }
 
 /**
@@ -73,32 +79,44 @@ export const hasRole = (roles: AllowedRoles): boolean => {
     return false
   }
 
-  const currentUserRoles = context.currentUser?.roles
+  const currentUserRoles = context.currentUser?.role
 
   if (typeof roles === 'string') {
     if (typeof currentUserRoles === 'string') {
       // roles to check is a string, currentUser.roles is a string
       return currentUserRoles === roles
-    } else if (Array.isArray(currentUserRoles)) {
-      // roles to check is a string, currentUser.roles is an array
-      return currentUserRoles?.some((allowedRole) => roles === allowedRole)
-    }
-  }
-
-  if (Array.isArray(roles)) {
-    if (Array.isArray(currentUserRoles)) {
-      // roles to check is an array, currentUser.roles is an array
-      return currentUserRoles?.some((allowedRole) =>
-        roles.includes(allowedRole)
-      )
-    } else if (typeof currentUserRoles === 'string') {
-      // roles to check is an array, currentUser.roles is a string
-      return roles.some((allowedRole) => currentUserRoles === allowedRole)
     }
   }
 
   // roles not found
   return false
+
+  // const currentUserRoles = context.currentUser?.roles
+
+  // if (typeof roles === 'string') {
+  //   if (typeof currentUserRoles === 'string') {
+  //     // roles to check is a string, currentUser.roles is a string
+  //     return currentUserRoles === roles
+  //   } else if (Array.isArray(currentUserRoles)) {
+  //     // roles to check is a string, currentUser.roles is an array
+  //     return currentUserRoles?.some((allowedRole) => roles === allowedRole)
+  //   }
+  // }
+
+  // if (Array.isArray(roles)) {
+  //   if (Array.isArray(currentUserRoles)) {
+  //     // roles to check is an array, currentUser.roles is an array
+  //     return currentUserRoles?.some((allowedRole) =>
+  //       roles.includes(allowedRole)
+  //     )
+  //   } else if (typeof currentUserRoles === 'string') {
+  //     // roles to check is an array, currentUser.roles is a string
+  //     return roles.some((allowedRole) => currentUserRoles === allowedRole)
+  //   }
+  // }
+
+  // // roles not found
+  // return false
 }
 
 /**

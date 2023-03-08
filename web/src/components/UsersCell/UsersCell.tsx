@@ -10,7 +10,7 @@ export const QUERY = gql`
       email
       picture
       active
-      role
+      roles
     }
   }
 `
@@ -85,7 +85,7 @@ export const Success = ({ users }: CellSuccessProps<UsersQuery>) => {
                       {user.active ? 'active' : 'deactive'}
                     </td>
                     <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                      {user.role}
+                      {user.roles}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
                       <a

@@ -6,7 +6,7 @@ export const schema = gql`
     picture: String
     userName: String!
     active: Boolean
-    role: String!
+    roles: String!
     createdAt: DateTime!
   }
 
