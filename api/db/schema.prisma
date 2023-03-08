@@ -61,6 +61,8 @@ model User {
   email             String   @unique
   picture           String?
   userName          String
+  active            Boolean  @default(true)
+  role              String   @default("user")
   bargains          Bargain[]
   votes             Vote[]
   comments          Comment[]
@@ -72,5 +74,6 @@ model Link {
   bargain           Bargain  @relation(fields: [bargainId], references: [id], onDelete: Cascade)
   bargainId         Int
   link              String
+  active            Boolean  @default(true)
   createdAt         DateTime @default(now())
 }

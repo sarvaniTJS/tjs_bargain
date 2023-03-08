@@ -12,6 +12,13 @@ export const user: QueryResolvers['user'] = ({ id }) => {
   })
 }
 
+export const updateUser = ({ id, input }) => {
+  return db.user.update({
+    data: input,
+    where: { id },
+  })
+}
+
 export const User: UserRelationResolvers = {
   bargains: (_obj, { root }) => {
     return db.user.findUnique({ where: { id: root?.id } }).bargains()
