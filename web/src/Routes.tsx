@@ -18,6 +18,7 @@ import UserNavLayout from './layouts/UserNavLayout/UserNavLayout'
 const Routes = () => {
   return (
     <Router useAuth={useAuth}>
+      <Route path="/user-details" page={UserDetailsPage} name="userDetails" />
       <Set wrap={NavbarLayout}>
         <Route path="/show-bargain/{id:Int}" page={ShowBargainPage} name="showBargain" />
         <Route path="/" page={HomePage} name="home" />
