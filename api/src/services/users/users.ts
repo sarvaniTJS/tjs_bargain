@@ -2,8 +2,15 @@ import type { QueryResolvers, UserRelationResolvers } from 'types/graphql'
 
 import { db } from 'src/lib/db'
 
-export const users: QueryResolvers['users'] = () => {
-  return db.user.findMany()
+export const users: QueryResolvers['users'] = ({ userName }) => {
+  return db.user.findMany({
+    where: {
+      userName: {
+        contains: userName,
+        mode: 'insensitive',
+      },
+    },
+  })
 }
 
 export const user: QueryResolvers['user'] = ({ id }) => {

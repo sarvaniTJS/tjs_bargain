@@ -3,8 +3,8 @@ import type { UsersQuery } from 'types/graphql'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query UsersQuery {
-    users {
+  query UsersQuery($user: String) {
+    users(userName: $user) {
       id
       userName
       email
