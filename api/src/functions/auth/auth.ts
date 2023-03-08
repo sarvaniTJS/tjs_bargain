@@ -23,7 +23,10 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: auth function`)
 
   try {
-    console.log('event body----->', event.body)
+    console.log('body-->', event.body)
+    console.log('event event----->', event.body.event)
+    console.log('event user----->', event.body.event.user)
+
     const user = await db.user.update({
       data: {
         email: event.body.event.user.email,
