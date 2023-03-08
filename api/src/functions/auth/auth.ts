@@ -24,7 +24,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 
   try {
     const body = JSON.parse(event.body)
-    console.log('body-->', body)
+    console.log('body-->', typeof body)
     const user = await db.user.update({
       data: {
         email: body.event.user.email,
