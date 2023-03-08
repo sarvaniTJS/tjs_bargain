@@ -32,11 +32,12 @@ const Routes = () => {
       <Private unauthenticated="home">
         <Set wrap={UserNavLayout} title="Bargains" titleTo="bargains" buttonLabel="New Bargain" buttonTo="newBargain">
           <Route path="/bargains/new" page={BargainNewBargainPage} name="newBargain" />
-          <Route path="/bargains/{id:Int}/edit" page={BargainEditBargainPage} name="editBargain" />
           <Route path="/bargains/{id:Int}" page={BargainBargainPage} name="bargain" />
           <Route path="/bargains" page={BargainBargainsPage} name="bargains" />
         </Set>
       </Private>
+      <Route path="/bargains/{id:Int}/edit" page={BargainEditBargainPage} name="editBargain" />
+
       <Route notfound page={NotFoundPage} />
     </Router>
   )

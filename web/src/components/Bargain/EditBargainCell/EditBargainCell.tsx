@@ -5,6 +5,7 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { useAuth } from 'src/auth'
 import BargainForm from 'src/components/Bargain/BargainForm'
 
 export const QUERY = gql`
@@ -37,12 +38,13 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ bargain }: CellSuccessProps<EditBargainById>) => {
+  const { hasRole } = useAuth()
   const [updateBargain, { loading, error }] = useMutation(
     UPDATE_BARGAIN_MUTATION,
     {
       onCompleted: () => {
         toast.success('Bargain updated')
-        navigate(routes.bargains())
+        navigate(hasRole('admin') ? routes.bargainDetails() : routes.bargains())
       },
       onError: (error) => {
         toast.error(error.message)
@@ -60,10 +62,17 @@ export const Success = ({ bargain }: CellSuccessProps<EditBargainById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Bargain {bargain?.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Bargain {bargain?.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <BargainForm bargain={bargain} onSave={onSave} error={error} loading={loading} />
+        <BargainForm
+          bargain={bargain}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

@@ -3,6 +3,7 @@ import type {
   FindBargainsTableQueryVariables,
 } from 'types/graphql'
 
+import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
@@ -89,12 +90,13 @@ export const Success = ({
                       {bargain.active ? 'active' : 'deactive'}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a
-                        href="#"
-                        className="text-indigo-600 hover:text-indigo-900"
+                      <Link
+                        to={routes.editBargain({ id: bargain.id })}
+                        title={'Edit bargain ' + bargain.id}
+                        className="rw-button rw-button-small rw-button-blue"
                       >
-                        Edit<span className="sr-only">, {bargain.id}</span>
-                      </a>
+                        Edit
+                      </Link>
                     </td>
                   </tr>
                 ))}

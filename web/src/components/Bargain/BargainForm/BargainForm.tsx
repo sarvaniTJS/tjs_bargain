@@ -1,3 +1,5 @@
+import type { EditBargainById, UpdateBargainInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -7,12 +9,7 @@ import {
   CheckboxField,
   Submit,
 } from '@redwoodjs/forms'
-
-import type { EditBargainById, UpdateBargainInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
-
-
-
 
 type FormBargain = NonNullable<EditBargainById['bargain']>
 
@@ -25,16 +22,6 @@ interface BargainFormProps {
 
 const BargainForm = (props: BargainFormProps) => {
   const onSubmit = (data: FormBargain) => {
-
-
-
-
-
-
-
-
-
-
     props.onSave(data, props?.bargain?.id)
   }
 
@@ -56,14 +43,13 @@ const BargainForm = (props: BargainFormProps) => {
           Product
         </Label>
 
-          <TextField
-            name="product"
-            defaultValue={props.bargain?.product}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-
+        <TextField
+          name="product"
+          defaultValue={props.bargain?.product}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="product" className="rw-field-error" />
 
@@ -75,14 +61,13 @@ const BargainForm = (props: BargainFormProps) => {
           Description
         </Label>
 
-          <TextField
-            name="description"
-            defaultValue={props.bargain?.description}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-
+        <TextField
+          name="description"
+          defaultValue={props.bargain?.description}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="description" className="rw-field-error" />
 
@@ -94,21 +79,17 @@ const BargainForm = (props: BargainFormProps) => {
           Active
         </Label>
 
-          <CheckboxField
-            name="active"
-            defaultChecked={props.bargain?.active}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-
+        <CheckboxField
+          name="active"
+          defaultChecked={props.bargain?.active}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+        />
 
         <FieldError name="active" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
