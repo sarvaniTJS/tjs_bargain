@@ -1,5 +1,6 @@
 import type { APIGatewayEvent, Context } from 'aws-lambda'
 
+import { db } from 'src/lib/db'
 import { logger } from 'src/lib/logger'
 
 /**
@@ -21,18 +22,21 @@ import { logger } from 'src/lib/logger'
 export const handler = async (event: APIGatewayEvent, _context: Context) => {
   logger.info(`${event.httpMethod} ${event.path}: auth function`)
 
-  // const { email, sub, picture } = JSON.parse(event.body) as Record<
-  //   string,
-  //   string
-  // >
   try {
     console.log('event body----->', event)
-    // const user = await db.user.create({
-    //   data: { email, externalId: sub, userName: email, picture },
-    // })
+    const user = await db.user.update({
+      data: {
+        email: event.user.email,
+        userName: event.user.nickname,
+        picture: event.user.picture,
+      },
+      where: {
+        externalId: event.user.user_id,
+      },
+    })
     return {
       statusCode: 200,
-      // body: JSON.stringify({ user }),
+      body: JSON.stringify({ user }),
     }
   } catch (error) {
     return {
