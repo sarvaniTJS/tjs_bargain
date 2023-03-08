@@ -24,6 +24,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 
   try {
     console.log('body-->', event.body)
+    console.log(typeof event.body)
     console.log('event event----->', event.body.event)
     console.log('event user----->', event.body.event.user)
 
