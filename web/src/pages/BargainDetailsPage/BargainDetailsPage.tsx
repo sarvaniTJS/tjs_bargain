@@ -1,6 +1,7 @@
+import { useState } from 'react'
+
 import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
-import { useState } from 'react'
 
 import BargainsTableCell from 'src/components/BargainsTableCell/BargainsTableCell'
 
@@ -10,7 +11,7 @@ const BargainDetailsPage = () => {
   return (
     <>
       <MetaTags title="BargainDetails" description="BargainDetails page" />
-      <div>
+      <div className="mb-6 px-6">
         <label htmlFor="bargain" className="sr-only">
           Search Bargain
         </label>
@@ -25,7 +26,7 @@ const BargainDetailsPage = () => {
         />
       </div>
 
-      <BargainsTableCell product={search}  />
+      <BargainsTableCell product={search} />
     </>
   )
 }

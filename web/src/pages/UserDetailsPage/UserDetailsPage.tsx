@@ -11,7 +11,7 @@ const UserDetailsPage = () => {
   return (
     <>
       <MetaTags title="UserDetails" description="UserDetails page" />
-      <div>
+      <div className="mb-6 px-6">
         <label htmlFor="user" className="sr-only">
           Search User
         </label>
