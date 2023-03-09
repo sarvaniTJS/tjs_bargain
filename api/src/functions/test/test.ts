@@ -29,8 +29,7 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
     const user = await db.user.create({
       data: {
         email: body.event.user.email,
-        userName: body.event.user.nickname,
-        picture: body.event.user.picture,
+        userName: body.event.user.email,
         externalId: body.event.user.user_id,
       },
     })
