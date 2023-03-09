@@ -60,7 +60,7 @@ const Comment = ({ comment, bargainId, reviewIdx }) => {
       <div className="flex space-x-4 text-sm text-gray-500">
         <div className="flex-none py-5">
           <img
-            src="https://s.gravatar.com/avatar/422d7242d6a1a55e64842f4be6c05c0b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
+            src={comment.user.picture}
             alt=""
             className="h-10 w-10 rounded-full bg-gray-100"
           />

@@ -29,6 +29,7 @@ export const QUERY = gql`
       user {
         userName
         createdAt
+        picture
       }
       comments {
         id
@@ -44,6 +45,7 @@ export const QUERY = gql`
         user {
           userName
           externalId
+          picture
         }
       }
     }
@@ -66,10 +68,10 @@ export const Success = ({
   const { isAuthenticated } = useAuth()
   return (
     <div>
-      <div className="lg:flex lg:items-center lg:justify-between">
+      <div className="flex items-center justify-between">
         <img
           className="h-12 w-12 rounded-full mr-3"
-          src="https://s.gravatar.com/avatar/422d7242d6a1a55e64842f4be6c05c0b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
+          src={showBargain.user.picture}
           alt=""
         />
         <div className="min-w-0 flex-1">

@@ -17,6 +17,7 @@ export const QUERY = gql`
       user {
         userName
         externalId
+        picture
       }
     }
   }

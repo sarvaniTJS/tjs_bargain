@@ -75,7 +75,7 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
         <div className="flex-shrink-0">
           <img
             className="inline-block h-10 w-10 rounded-full"
-            src="https://s.gravatar.com/avatar/422d7242d6a1a55e64842f4be6c05c0b?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
+            src={userMetadata.picture}
             alt=""
           />
         </div>
