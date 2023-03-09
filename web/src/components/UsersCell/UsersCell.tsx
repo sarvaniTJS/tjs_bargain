@@ -1,6 +1,10 @@
+import { useState } from 'react'
+
 import type { UsersQuery } from 'types/graphql'
 
+import { useMutation } from '@redwoodjs/web'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 export const QUERY = gql`
   query UsersQuery($user: String) {
@@ -9,6 +13,15 @@ export const QUERY = gql`
       userName
       email
       picture
+      active
+      roles
+    }
+  }
+`
+
+const UPDATE = gql`
+  mutation UpdateUserMutation($id: Int!, $input: UpdateUserInput!) {
+    updateUser(id: $id, input: $input) {
       active
       roles
     }
@@ -24,8 +37,41 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ users }: CellSuccessProps<UsersQuery>) => {
+  const [mode, setMode] = useState('default')
+  const [editId, setEditId] = useState()
+  const [active, setactive] = useState('')
+  const [role, setRole] = useState('')
+
+  const [updateUser, { loading, error }] = useMutation(UPDATE, {
+    onCompleted: () => {
+      toast.success('User updated')
+      setMode('default')
+    },
+    refetchQueries: [{ query: QUERY, variables: { userName: '' } }],
+  })
+
+  const onEdit = (user) => {
+    if (mode !== 'edit') {
+      setMode('edit')
+      setEditId(user.id)
+      setactive(user.active)
+      setRole(user.role)
+    }
+    if (mode === 'edit') {
+      updateUser({
+        variables: {
+          id: user.id,
+          input: {
+            active: active === 'true' ? true : false,
+            roles: role,
+          },
+        },
+      })
+    }
+  }
   return (
     <div className="px-4 sm:px-6 lg:px-8">
+      <Toaster />
       <div className="sm:flex sm:items-center">
         <div className="sm:flex-auto">
           <h1 className="text-base font-semibold leading-6 text-gray-900">
@@ -82,18 +128,51 @@ export const Success = ({ users }: CellSuccessProps<UsersQuery>) => {
                       {user.email}
                     </td>
                     <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                      {user.active ? 'active' : 'deactive'}
+                      {mode === 'edit' && editId === user.id ? (
+                        <select
+                          id="role"
+                          name="eole"
+                          className="mt-2 block w-full rounded-md border-0 p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          defaultValue={user.active ? 'active' : 'deactive'}
+                          value={active}
+                          onChange={(e) => setactive(e.target.value)}
+                        >
+                          <option value="true">Active</option>
+                          <option value="false">Deactive</option>
+                        </select>
+                      ) : user.active ? (
+                        'active'
+                      ) : (
+                        'deactive'
+                      )}
                     </td>
                     <td className="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
-                      {user.roles}
+                      {mode === 'edit' && editId === user.id ? (
+                        <select
+                          id="role"
+                          name="eole"
+                          className="mt-2 block w-full rounded-md border-0 p-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                          defaultValue={user.roles}
+                          value={role}
+                          onChange={(e) => setRole(e.target.value)}
+                        >
+                          <option value="admin">Admin</option>
+                          <option value="user">User</option>
+                        </select>
+                      ) : (
+                        user.roles
+                      )}
                     </td>
                     <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
-                      <a
-                        href="#"
+                      <button
+                        onClick={() => onEdit(user)}
                         className="text-indigo-600 hover:text-indigo-900"
                       >
-                        Edit<span className="sr-only">, {user.userName}</span>
-                      </a>
+                        {mode === 'edit' && editId === user.id
+                          ? 'Save'
+                          : 'Edit'}
+                        <span className="sr-only">, {user.userName}</span>
+                      </button>
                     </td>
                   </tr>
                 ))}
