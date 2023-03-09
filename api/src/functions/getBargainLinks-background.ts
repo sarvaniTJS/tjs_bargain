@@ -39,7 +39,6 @@ exports.handler = async function (event) {
   console.log('modelName', modelName)
   let data = await page.evaluate(() => {
     let rows = Array.from(document.querySelectorAll('tr.sh-osd__offer-row'))
-    console.log('rows==>', rows)
     rows = rows.map((r) => {
       let source = r.querySelector('td > div > a')?.text
       if (source) {
@@ -55,7 +54,6 @@ exports.handler = async function (event) {
       const price = r.querySelector('td:nth-child(4) > div > div')?.innerText
       return { source, link, price }
     })
-    console.log(rows)
     return rows
   })
 
