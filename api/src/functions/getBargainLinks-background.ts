@@ -33,17 +33,33 @@ exports.handler = async function (event) {
   console.log('gotolink', goto)
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
-  const linkNodeList = await page.evaluate(() => {
-    return document.querySelector('.b5ycib.shntl').href
-    // return document.querySelectorAll('.b5ycib.shntl')
-    // const links = linkElements.map((ele) => {
-    //   return ele.href
-    // })
-    // return links
+  const modelName = await page.evaluate(() => {
+    return document.querySelector('div.f0t7kf').textContent
   })
-  console.log('linkNodeList------>', linkNodeList)
-  // const linkList = Array.from(linkNodeList)
-  // console.log('linkList==========>', linkList)
+  console.log('modelName', modelName)
+  let data = await page.evaluate(() => {
+    let rows = Array.from(document.querySelectorAll('tr.sh-osd__offer-row'))
+    console.log('rows==>', rows)
+    rows = rows.map((r) => {
+      let source = r.querySelector('td > div > a')?.text
+      if (source) {
+        source = source.split('Opens')[0]
+      }
+      let link = r.querySelector('td:nth-child(5) > div > a')?.href
+      if (link) {
+        link = link.split('q=')
+        link = link[1].split('%')
+        link = link[0].split('&')
+        link = link[0]
+      }
+      const price = r.querySelector('td:nth-child(4) > div > div')?.innerText
+      return { source, link, price }
+    })
+    console.log(rows)
+    return rows
+  })
+
+  data = data.filter((d) => d.link.includes('http'))
   await browser.close()
 
   const end = Date.now()
@@ -66,15 +82,17 @@ exports.handler = async function (event) {
         console.log('delLink=======>', delLink)
       }
 
-      await tx.link.create({
-        data: { bargainId, link: linkNodeList },
+      data.forEach(async (d) => {
+        await tx.link.create({
+          data: {
+            bargainId,
+            link: d.link,
+            source: d.source,
+            price: d.price,
+            model: modelName,
+          },
+        })
       })
-
-      // linkList.forEach(async (l) => {
-      //   await tx.link.create({
-      //     data: { bargainId, link: l },
-      //   })
-      // })
       return {
         statusCode: 200,
       }

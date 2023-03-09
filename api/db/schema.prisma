@@ -73,7 +73,10 @@ model Link {
   id                Int      @id @default(autoincrement())
   bargain           Bargain  @relation(fields: [bargainId], references: [id], onDelete: Cascade)
   bargainId         Int
-  link              String
+  model             String?
+  source            String?
+  price             String?
+  link              String?
   active            Boolean  @default(true)
   createdAt         DateTime @default(now())
 }

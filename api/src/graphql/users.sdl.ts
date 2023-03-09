@@ -17,6 +17,7 @@ export const schema = gql`
   input UpdateUserInput {
     picture: String
     active: Boolean
+    roles: String
   }
 
   type Mutation {
