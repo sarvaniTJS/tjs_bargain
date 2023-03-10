@@ -12,7 +12,10 @@ exports.handler = async function (event) {
 
   // start scraping
   const start = Date.now()
-  const browser = await puppeteer.launch({ headless: true })
+  const browser = await puppeteer.launch({
+    headless: true,
+    executablePath: '/tmp/chrome/linux-1095492',
+  })
   const page = await browser.newPage()
   await page.goto(
     `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
