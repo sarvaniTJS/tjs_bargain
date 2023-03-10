@@ -14,7 +14,7 @@ exports.handler = async function (event) {
   const start = Date.now()
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: '/tmp/chrome/linux-1095492',
+    executablePath: '/tmp/chrome',
   })
   const page = await browser.newPage()
   await page.goto(
