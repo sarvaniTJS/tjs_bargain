@@ -39,14 +39,14 @@ exports.handler = async function (event) {
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
   const screenshot = await page.screenshot({ path: '/tmp/screenshot.png' })
-  const uploadedImage = await s3
-    .upload({
-      Bucket: 'ecourtsupload',
-      Key: 'screenshot.png',
-      Body: screenshot,
-    })
-    .promise()
-  console.log('location', uploadedImage.Location)
+  // const uploadedImage = await s3
+  //   .upload({
+  //     Bucket: 'ecourtsupload',
+  //     Key: 'screenshot.png',
+  //     Body: screenshot,
+  //   })
+  //   .promise()
+  // console.log('location', uploadedImage.Location)
   const modelName = await page.evaluate(() => {
     return document.querySelector('div.f0t7kf').textContent
   })
