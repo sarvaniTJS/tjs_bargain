@@ -35,9 +35,7 @@ exports.handler = async function (event) {
     return document.querySelector('div.f0t7kf').textContent
   })
   console.log('modelName', modelName)
-  const data = await page.$$eval('tr.sh-osd__offer-row', (data) => {
-    return data.map((d) => d.textContent)
-  })
+  const data = await page.$$eval('tr.sh-osd__offer-row')
   console.log('data', data)
   // let data = await page.evaluate(() => {
   //   let rows = Array.from(document.querySelectorAll('tr.sh-osd__offer-row'))
