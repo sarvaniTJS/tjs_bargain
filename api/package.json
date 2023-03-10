@@ -6,6 +6,7 @@
     "@redwoodjs/api": "4.2.2",
     "@redwoodjs/auth-auth0-api": "4.2.2",
     "@redwoodjs/graphql-server": "4.2.2",
+    "@sparticuz/chromium": "109",
     "aws-sdk": "^2.1332.0",
     "puppeteer": "^19.7.4"
   }

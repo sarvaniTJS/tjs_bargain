@@ -4706,6 +4706,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sparticuz/chromium@npm:109":
+  version: 109.0.6
+  resolution: "@sparticuz/chromium@npm:109.0.6"
+  dependencies:
+    tar-fs: ^2.1.1
+  checksum: fb4b5141b775ec70d0e28124c6dfc2168a4ee094872cb7aef5b4a4f34ffeefb880650c1205fcb78765f9dc756b4c781b2a8bc24fa28cc10bd0a3796c86dece08
+  languageName: node
+  linkType: hard
+
 "@storybook/addon-a11y@npm:6.5.16":
   version: 6.5.16
   resolution: "@storybook/addon-a11y@npm:6.5.16"
@@ -7872,6 +7881,7 @@ __metadata:
     "@redwoodjs/api": 4.2.2
     "@redwoodjs/auth-auth0-api": 4.2.2
     "@redwoodjs/graphql-server": 4.2.2
+    "@sparticuz/chromium": 109
     aws-sdk: ^2.1332.0
     puppeteer: ^19.7.4
   languageName: unknown
@@ -22822,7 +22832,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar-fs@npm:2.1.1":
+"tar-fs@npm:2.1.1, tar-fs@npm:^2.1.1":
   version: 2.1.1
   resolution: "tar-fs@npm:2.1.1"
   dependencies:
