@@ -14,8 +14,11 @@ exports.handler = async function (event) {
   // start scraping
   const start = Date.now()
   const browser = await puppeteer.launch({
-    headless: true,
+    args: chromium.args,
+    defaultViewport: chromium.defaultViewport,
     executablePath: await chromium.executablePath(),
+    headless: chromium.headless,
+    ignoreHTTPSErrors: true,
   })
   const page = await browser.newPage()
   await page.goto(
