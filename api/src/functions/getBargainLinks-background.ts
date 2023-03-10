@@ -1,7 +1,12 @@
 const chromium = require('@sparticuz/chromium')
+const AWS = require('aws-sdk')
 const puppeteer = require('puppeteer-core')
 
 const { db } = require('../lib/db')
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+})
 
 exports.handler = async function (event) {
   const { bargainId } = JSON.parse(event.body)
@@ -33,6 +38,14 @@ exports.handler = async function (event) {
   console.log('gotolink', goto)
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
+  const screenshot = await page.screenshot({ path: 'screenshot.png' })
+  await s3
+    .upload({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: 'screenshot.png',
+      Body: screenshot,
+    })
+    .promise()
   const modelName = await page.evaluate(() => {
     return document.querySelector('div.f0t7kf').textContent
   })
