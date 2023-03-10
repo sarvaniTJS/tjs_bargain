@@ -35,8 +35,22 @@ exports.handler = async function (event) {
     return document.querySelector('div.f0t7kf').textContent
   })
   console.log('modelName', modelName)
-  const data = await page.$$eval('tr.sh-osd__offer-row')
+  let data = await page.$$('tr.sh-osd__offer-row')
   console.log('data', data)
+  data = data.map((r) => {
+    let source = r.$('td > div > a')?.text
+    if (source) {
+      source = source.split('Opens')[0]
+    }
+    let link = r.$('td:nth-child(5) > div > a')?.href
+    if (link) {
+      link = link.split('q=')[1].split('%')[0].split('&')[0]
+    }
+    const price = r.$('td:nth-child(4) > div > div')?.innerText
+    return { source, link, price }
+  })
+  console.log('data', data)
+
   // let data = await page.evaluate(() => {
   //   let rows = Array.from(document.querySelectorAll('tr.sh-osd__offer-row'))
   //   rows = rows.map((r) => {
