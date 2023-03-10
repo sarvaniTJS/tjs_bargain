@@ -1,36 +1,22 @@
-const chromium = require('@sparticuz/chromium')
-const AWS = require('aws-sdk')
-const puppeteer = require('puppeteer-core')
+const puppeteer = require('puppeteer')
 
 const { db } = require('../lib/db')
-const s3 = new AWS.S3({
-  accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-  secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
-})
 
 exports.handler = async function (event) {
+  // get bargain
   const { bargainId } = JSON.parse(event.body)
   const bargain = await db.bargain.findUnique({
     where: { id: bargainId },
   })
   console.log('bargain------->', bargain.product)
-  const start = Date.now()
-  const path = await chromium.executablePath()
-  console.log('path==========>', path)
-  const browser = await puppeteer.launch({
-    // Required
-    executablePath: path,
 
-    // Optional
-    args: chromium.args,
-    defaultViewport: chromium.defaultViewport,
-    headless: chromium.headless,
-  })
+  // start scraping
+  const start = Date.now()
+  const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
   await page.goto(
     `https://www.google.co.in/search?q=${bargain.product}&tbm=shop`
   )
-
   await page.waitForSelector('.iXEZD')
   const goto = await page.evaluate(() => {
     return document.querySelector('a.iXEZD').href
@@ -38,15 +24,6 @@ exports.handler = async function (event) {
   console.log('gotolink', goto)
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
-  const screenshot = await page.screenshot({ path: '/tmp/screenshot.png' })
-  // const uploadedImage = await s3
-  //   .upload({
-  //     Bucket: 'ecourtsupload',
-  //     Key: 'screenshot.png',
-  //     Body: screenshot,
-  //   })
-  //   .promise()
-  // console.log('location', uploadedImage.Location)
   const modelName = await page.evaluate(() => {
     return document.querySelector('div.f0t7kf').textContent
   })
@@ -60,10 +37,7 @@ exports.handler = async function (event) {
       }
       let link = r.querySelector('td:nth-child(5) > div > a')?.href
       if (link) {
-        link = link.split('q=')
-        link = link[1].split('%')
-        link = link[0].split('&')
-        link = link[0]
+        link = link.split('q=')[1].split('%')[0].split('&')[0]
       }
       const price = r.querySelector('td:nth-child(4) > div > div')?.innerText
       return { source, link, price }
@@ -72,6 +46,7 @@ exports.handler = async function (event) {
   })
 
   data = data.filter((d) => d.link.includes('http'))
+  console.log('data', data)
   await browser.close()
 
   const end = Date.now()

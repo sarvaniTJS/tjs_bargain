@@ -4706,16 +4706,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sparticuz/chromium@npm:111":
-  version: 111.0.0
-  resolution: "@sparticuz/chromium@npm:111.0.0"
-  dependencies:
-    follow-redirects: ^1.15.2
-    tar-fs: ^2.1.1
-  checksum: 44f9ecf67285a1e9bb02df41805a7177f397c11ce5ca182612d13887ae43f260406c72c4cce33381f222011803425215d0a3ff452b703f1dbd30a55a6894e284
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-a11y@npm:6.5.16":
   version: 6.5.16
   resolution: "@storybook/addon-a11y@npm:6.5.16"
@@ -7882,9 +7872,8 @@ __metadata:
     "@redwoodjs/api": 4.2.2
     "@redwoodjs/auth-auth0-api": 4.2.2
     "@redwoodjs/graphql-server": 4.2.2
-    "@sparticuz/chromium": 111
     aws-sdk: ^2.1332.0
-    puppeteer-core: ^19.7.2
+    puppeteer: ^19.7.4
   languageName: unknown
   linkType: soft
 
@@ -10509,6 +10498,18 @@ __metadata:
     parse-json: ^5.0.0
     path-type: ^4.0.0
   checksum: cea301202bb68373f9c8ccc77a6002aab1032f327dd1458e5932ee1a2f48919c881074d702cece91f18275673817872a0d3d00eb46f30a33c8f2009dbbac0e5c
+  languageName: node
+  linkType: hard
+
+"cosmiconfig@npm:8.1.0":
+  version: 8.1.0
+  resolution: "cosmiconfig@npm:8.1.0"
+  dependencies:
+    import-fresh: ^3.2.1
+    js-yaml: ^4.1.0
+    parse-json: ^5.0.0
+    path-type: ^4.0.0
+  checksum: ca26acee57ce4744d59545c9b2aaf2ffe770d783f1bc242eb5be49c95e9bc5e55b1233ebb155131bff37ae9296196e150580c4742d64ec34e36c469f3306cb82
   languageName: node
   linkType: hard
 
@@ -13263,7 +13264,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.15.2":
+"follow-redirects@npm:^1.0.0":
   version: 1.15.2
   resolution: "follow-redirects@npm:1.15.2"
   peerDependenciesMeta:
@@ -13787,6 +13788,18 @@ __metadata:
     minimatch: ^5.0.1
     once: ^1.3.0
   checksum: cb0b5cab17a59c57299376abe5646c7070f8acb89df5595b492dba3bfb43d301a46c01e5695f01154e6553168207cb60d4eaf07d3be4bc3eb9b0457c5c561d0f
+  languageName: node
+  linkType: hard
+
+"glob@npm:^9.2.0":
+  version: 9.2.1
+  resolution: "glob@npm:9.2.1"
+  dependencies:
+    fs.realpath: ^1.0.0
+    minimatch: ^7.4.1
+    minipass: ^4.2.4
+    path-scurry: ^1.6.1
+  checksum: 062cdbf86fe26b92352728e6f9546d143c2fa331ed8dc40573d790cd6daf5ea5732668ecb672d1df555ee4a14c8e3df5c1f269afb4f6346c1db29ee4856fb4bf
   languageName: node
   linkType: hard
 
@@ -17652,6 +17665,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minimatch@npm:^7.4.1":
+  version: 7.4.2
+  resolution: "minimatch@npm:7.4.2"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: 6deed7078b84934179cec0cc0b46d27b76f995deda7f5d1833f376d8e4c062f4df08f4d979899109b4304fae975b0ebd877aa2a8a94b70ad76d640bf44c070e2
+  languageName: node
+  linkType: hard
+
 "minimist@npm:^1.1.1, minimist@npm:^1.1.3, minimist@npm:^1.2.0, minimist@npm:^1.2.5, minimist@npm:^1.2.6":
   version: 1.2.8
   resolution: "minimist@npm:1.2.8"
@@ -17723,6 +17745,13 @@ __metadata:
   version: 4.0.3
   resolution: "minipass@npm:4.0.3"
   checksum: 445425e23866511e729e736c93b938b3453f8912b72bff7cc06a89ba43de93896f4feb201296114e329af0c932793818ad3a6b0031016a3f30e234f0edfdaca4
+  languageName: node
+  linkType: hard
+
+"minipass@npm:^4.0.2, minipass@npm:^4.2.4":
+  version: 4.2.4
+  resolution: "minipass@npm:4.2.4"
+  checksum: 8173d31585b87c46ce3f548fc99035abfccf2e6f32fcc8c766351532da613cebb9123f6b3bf5ca89ba3a0c3fe22ae55bcbd88429226a03455ec291261c702973
   languageName: node
   linkType: hard
 
@@ -19040,6 +19069,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"path-scurry@npm:^1.6.1":
+  version: 1.6.1
+  resolution: "path-scurry@npm:1.6.1"
+  dependencies:
+    lru-cache: ^7.14.1
+    minipass: ^4.0.2
+  checksum: 5fe11e99b9ddd93ca384846057fe45843e5b88564ea0acf227c58fbc635ccd93a2a491588677649f54bb68067418331b8c914e027bd66fb980a5a7f007a62fe7
+  languageName: node
+  linkType: hard
+
 "path-to-regexp@npm:0.1.7":
   version: 0.1.7
   resolution: "path-to-regexp@npm:0.1.7"
@@ -20228,9 +20267,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"puppeteer-core@npm:^19.7.2":
-  version: 19.7.2
-  resolution: "puppeteer-core@npm:19.7.2"
+"puppeteer-core@npm:19.7.4":
+  version: 19.7.4
+  resolution: "puppeteer-core@npm:19.7.4"
   dependencies:
     chromium-bidi: 0.4.4
     cross-fetch: 3.1.5
@@ -20239,16 +20278,29 @@ __metadata:
     extract-zip: 2.0.1
     https-proxy-agent: 5.0.1
     proxy-from-env: 1.1.0
-    rimraf: 3.0.2
+    rimraf: 4.4.0
     tar-fs: 2.1.1
     unbzip2-stream: 1.4.3
-    ws: 8.11.0
+    ws: 8.12.1
   peerDependencies:
     typescript: ">= 4.7.4"
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 0c0bba4856e3a69980a970011ea9725d6a0245678c4a6c16bf3cacb28f3cc3cf41440b37406ea1f7e31d407621c36e2dc7872e73e4b5c881a60c254fd882578b
+  checksum: 14cf3501ccd1abbd1017f1622f2aa4da45ebb53d88964d87a20a1b3f1631aa9b154c187ac6f14c449a09f878b25425cd6c129f34ce2590827c741e48f64991cd
+  languageName: node
+  linkType: hard
+
+"puppeteer@npm:^19.7.4":
+  version: 19.7.4
+  resolution: "puppeteer@npm:19.7.4"
+  dependencies:
+    cosmiconfig: 8.1.0
+    https-proxy-agent: 5.0.1
+    progress: 2.0.3
+    proxy-from-env: 1.1.0
+    puppeteer-core: 19.7.4
+  checksum: 0856fa22ebf295623edfc4350780d545334f9d3accba46adb8a3a0977e8fdf4c572fa1f894f31511c3b93b6b412b9dc8b333c0cf749d97cb5de7c93d6f833b3e
   languageName: node
   linkType: hard
 
@@ -21222,6 +21274,17 @@ __metadata:
   bin:
     rimraf: bin.js
   checksum: 9cb7757acb489bd83757ba1a274ab545eafd75598a9d817e0c3f8b164238dd90eba50d6b848bd4dcc5f3040912e882dc7ba71653e35af660d77b25c381d402e8
+  languageName: node
+  linkType: hard
+
+"rimraf@npm:4.4.0":
+  version: 4.4.0
+  resolution: "rimraf@npm:4.4.0"
+  dependencies:
+    glob: ^9.2.0
+  bin:
+    rimraf: dist/cjs/src/bin.js
+  checksum: 41a6af9fa605e9797c66e538301b34b8cd7323e75ea803bc0490bb31dce5c5573ffcfcf6a93c3b3fae14e4d5548fc27006250aed3867a200d102384582adecf0
   languageName: node
   linkType: hard
 
@@ -22759,7 +22822,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar-fs@npm:2.1.1, tar-fs@npm:^2.1.1":
+"tar-fs@npm:2.1.1":
   version: 2.1.1
   resolution: "tar-fs@npm:2.1.1"
   dependencies:
@@ -24907,21 +24970,6 @@ __metadata:
     imurmurhash: ^0.1.4
     signal-exit: ^3.0.7
   checksum: a2c282c95ef5d8e1c27b335ae897b5eca00e85590d92a3fd69a437919b7b93ff36a69ea04145da55829d2164e724bc62202cdb5f4b208b425aba0807889375c7
-  languageName: node
-  linkType: hard
-
-"ws@npm:8.11.0":
-  version: 8.11.0
-  resolution: "ws@npm:8.11.0"
-  peerDependencies:
-    bufferutil: ^4.0.1
-    utf-8-validate: ^5.0.2
-  peerDependenciesMeta:
-    bufferutil:
-      optional: true
-    utf-8-validate:
-      optional: true
-  checksum: b672b312f357afba8568b9dbb9e08b9e8a20845659b35fa6b340dc848efe371379f5e22bb1dc89c4b2940d5e2dc52dd1de85dde41776875fce115a448f94754f
   languageName: node
   linkType: hard
 
