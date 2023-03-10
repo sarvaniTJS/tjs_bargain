@@ -84,6 +84,7 @@ exports.handler = async function (event) {
         statusCode: 200,
       }
     })
+    console.log('new data created')
   } catch (error) {
     return {
       statusCode: 400,
