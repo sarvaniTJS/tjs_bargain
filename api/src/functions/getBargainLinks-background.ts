@@ -38,7 +38,7 @@ exports.handler = async function (event) {
   console.log('gotolink', goto)
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
-  const screenshot = await page.screenshot({ path: 'screenshot.png' })
+  const screenshot = await page.screenshot({ path: '/tmp/screenshot.png' })
   const uploadedImage = await s3
     .upload({
       Bucket: process.env.AWS_S3_BUCKET_NAME,
