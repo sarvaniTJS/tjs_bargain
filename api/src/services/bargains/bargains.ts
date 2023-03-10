@@ -17,6 +17,19 @@ export const bargains: QueryResolvers['bargains'] = ({ product }) => {
   })
 }
 
+export const myBargains = async ({ externalId }) => {
+  const user = await db.user.findUnique({
+    where: {
+      externalId,
+    },
+  })
+  return db.bargain.findMany({
+    where: {
+      userId: user.id,
+    },
+  })
+}
+
 export const bargain: QueryResolvers['bargain'] = ({ id }) => {
   return db.bargain.findUnique({
     where: { id },

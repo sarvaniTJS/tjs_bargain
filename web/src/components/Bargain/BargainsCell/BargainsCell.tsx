@@ -6,8 +6,8 @@ import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import Bargains from 'src/components/Bargain/Bargains'
 
 export const QUERY = gql`
-  query FindBargains {
-    bargains {
+  query FindBargains($externalId: String!) {
+    myBargains(externalId: $externalId) {
       id
       product
       description
@@ -23,10 +23,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No bargains yet. '}
-      <Link
-        to={routes.newBargain()}
-        className="rw-link"
-      >
+      <Link to={routes.newBargain()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
@@ -37,6 +34,6 @@ export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error?.message}</div>
 )
 
-export const Success = ({ bargains }: CellSuccessProps<FindBargains>) => {
-  return <Bargains bargains={bargains} />
+export const Success = ({ myBargains }: CellSuccessProps<FindBargains>) => {
+  return <Bargains bargains={myBargains} />
 }

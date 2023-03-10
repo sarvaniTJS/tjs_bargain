@@ -15,6 +15,7 @@ export const schema = gql`
 
   type Query {
     bargains(product: String): [Bargain!]! @skipAuth
+    myBargains(externalId: String): [Bargain!]! @requireAuth
     bargain(id: Int!): Bargain @skipAuth
   }
 
