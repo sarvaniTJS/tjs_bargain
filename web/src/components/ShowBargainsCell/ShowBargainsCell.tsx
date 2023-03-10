@@ -9,6 +9,7 @@ export const QUERY = gql`
       id
       product
       description
+      active
       user {
         userName
         picture
@@ -28,9 +29,12 @@ export const Failure = ({ error }: CellFailureProps) => (
 export const Success = ({
   showBargains,
 }: CellSuccessProps<ShowBargainsQuery>) => {
+  const activeShowBargains = showBargains.filter(
+    (bargain) => bargain.active === true
+  )
   return (
     <ul className="divide-y divide-gray-200">
-      {showBargains.map((item) => (
+      {activeShowBargains.map((item) => (
         <li key={item.id} className="flex py-4">
           <img
             className="h-10 w-10 rounded-full"

@@ -24,20 +24,31 @@ export const handler = async (event: APIGatewayEvent, _context: Context) => {
 
   try {
     const body = JSON.parse(event.body)
-    console.log('body-->', typeof body)
-    const user = await db.user.update({
-      data: {
-        email: body.event.user.email,
-        userName: body.event.user.nickname,
-        picture: body.event.user.picture,
-      },
+    const isUserActive = await db.user.findUnique({
       where: {
         externalId: body.event.user.user_id,
       },
     })
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ user }),
+    if (isUserActive.active) {
+      const user = await db.user.update({
+        data: {
+          email: body.event.user.email,
+          userName: body.event.user.nickname,
+          picture: body.event.user.picture,
+        },
+        where: {
+          externalId: body.event.user.user_id,
+        },
+      })
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ user }),
+      }
+    } else {
+      return {
+        statusCode: 500,
+        body: JSON.stringify('User is banned'),
+      }
     }
   } catch (error) {
     return {
