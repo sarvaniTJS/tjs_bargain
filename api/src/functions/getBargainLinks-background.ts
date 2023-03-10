@@ -39,13 +39,14 @@ exports.handler = async function (event) {
   await page.goto(goto)
   await page.waitForSelector('.UxuaJe.shntl.FkMp')
   const screenshot = await page.screenshot({ path: 'screenshot.png' })
-  await s3
+  const uploadedImage = await s3
     .upload({
       Bucket: process.env.AWS_S3_BUCKET_NAME,
       Key: 'screenshot.png',
       Body: screenshot,
     })
     .promise()
+  console.log('location', uploadedImage.Location)
   const modelName = await page.evaluate(() => {
     return document.querySelector('div.f0t7kf').textContent
   })
