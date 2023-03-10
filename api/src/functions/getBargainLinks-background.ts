@@ -41,7 +41,7 @@ exports.handler = async function (event) {
   const screenshot = await page.screenshot({ path: '/tmp/screenshot.png' })
   const uploadedImage = await s3
     .upload({
-      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Bucket: 'ecourtsupload',
       Key: 'screenshot.png',
       Body: screenshot,
     })
