@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
-import { Link, routes } from '@redwoodjs/router'
+import { Link, routes, useMatch } from '@redwoodjs/router'
 
 import { useAuth } from 'src/auth'
 
@@ -21,11 +21,22 @@ const UserNavLayout = ({ children }: UserNavLayoutProps) => {
     email: isAuthenticated && userMetadata.email,
     imageUrl: isAuthenticated && userMetadata.picture,
   }
-  console.log(routes)
   const navigation = [
-    { name: 'My Bargains', to: routes.bargains(), current: true },
-    { name: 'Create bargain', to: routes.newBargain(), current: false },
-    { name: 'Home', to: routes.home(), current: false },
+    {
+      name: 'Create bargain',
+      to: routes.newBargain(),
+      current: useMatch(routes.newBargain()).match,
+    },
+    {
+      name: 'My Bargains',
+      to: routes.bargains(),
+      current: useMatch(routes.bargains()).match,
+    },
+    {
+      name: 'Home',
+      to: routes.home(),
+      current: useMatch(routes.home()).match,
+    },
   ]
   const userNavigation = [
     { name: 'Your Profile', href: '#' },
