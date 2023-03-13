@@ -13,9 +13,9 @@ export const users: QueryResolvers['users'] = ({ userName }) => {
   })
 }
 
-export const user: QueryResolvers['user'] = ({ id }) => {
+export const user: QueryResolvers['user'] = ({ externalId }) => {
   return db.user.findUnique({
-    where: { id },
+    where: { externalId },
   })
 }
 

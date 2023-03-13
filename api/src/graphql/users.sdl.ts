@@ -12,6 +12,7 @@ export const schema = gql`
 
   type Query {
     users(userName: String): [User!]! @skipAuth
+    user(externalId: String): User! @requireAuth
   }
 
   input UpdateUserInput {

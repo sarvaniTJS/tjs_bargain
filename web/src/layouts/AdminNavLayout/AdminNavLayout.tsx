@@ -40,7 +40,7 @@ const AdminNavLayout = ({ children }: AdminNavLayoutProps) => {
     },
   ]
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
+    { name: 'Your Profile', to: routes.user() },
     { name: 'Admin Settings', to: routes.userDetails() },
   ]
 

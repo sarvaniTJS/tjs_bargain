@@ -29,7 +29,7 @@ const NavbarLayout = ({ children }: NavbarLayoutProps) => {
     { name: 'Contact', to: '#', current: false },
   ]
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
+    { name: 'Your Profile', to: routes.user() },
     { name: 'Admin Settings', to: routes.userDetails() },
   ]
 

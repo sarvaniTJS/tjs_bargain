@@ -34,6 +34,7 @@ const Routes = () => {
           <Route path="/bargains/new" page={BargainNewBargainPage} name="newBargain" />
           <Route path="/bargains/{id:Int}" page={BargainBargainPage} name="bargain" />
           <Route path="/bargains" page={BargainBargainsPage} name="bargains" />
+          <Route path="/user" page={UserPage} name="user" />
         </Set>
       </Private>
       <Route path="/bargains/{id:Int}/edit" page={BargainEditBargainPage} name="editBargain" />
