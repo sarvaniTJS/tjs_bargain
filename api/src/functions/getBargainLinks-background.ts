@@ -38,6 +38,8 @@ exports.handler = async function (event) {
 
   let data = await page.$$('tr.sh-osd__offer-row')
 
+  console.log('data1', data)
+
   data = await data.map(async (d) => {
     const source = await d.$eval('a.UxuaJe.shntl.FkMp', (node) => node.text)
     // if (source) {
