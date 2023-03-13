@@ -3,7 +3,7 @@ import type { EditBargainById, UpdateBargainInput } from 'types/graphql'
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
-import { toast } from '@redwoodjs/web/toast'
+import { toast, Toaster } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import BargainForm from 'src/components/Bargain/BargainForm'
@@ -44,7 +44,7 @@ export const Success = ({ bargain }: CellSuccessProps<EditBargainById>) => {
     {
       onCompleted: () => {
         toast.success('Bargain updated')
-        navigate(hasRole('admin') ? routes.bargainDetails() : routes.bargains())
+        // navigate(hasRole('admin') ? routes.bargainDetails() : routes.bargains())
       },
       onError: (error) => {
         toast.error(error.message)
@@ -66,6 +66,7 @@ export const Success = ({ bargain }: CellSuccessProps<EditBargainById>) => {
           Edit Bargain {bargain?.id}
         </h2>
       </header>
+      <Toaster />
       <div className="rw-segment-main">
         <BargainForm
           bargain={bargain}

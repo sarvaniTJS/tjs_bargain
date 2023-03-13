@@ -6,7 +6,6 @@ import { toast, Toaster } from '@redwoodjs/web/toast'
 import { useAuth } from 'src/auth'
 import { QUERY as FindCommentQuery } from 'src/components/CommentCell'
 import { QUERY as FindShowBargainQuery } from 'src/components/ShowBargainCell'
-import { isAuthenticated } from 'src/lib/auth'
 
 import CommentCell from '../CommentCell/CommentCell'
 import CommentForm from '../CommentForm/CommentForm'
@@ -105,6 +104,8 @@ const Comment = ({ comment, bargainId, reviewIdx }) => {
                 <CommentForm
                   bargainId={bargainId.id}
                   parentCommentId={comment.id}
+                  setShowForm={setShowForm}
+                  setShowChildComments={setShowChildComments}
                 />
               </div>
               <div className="mt-4">

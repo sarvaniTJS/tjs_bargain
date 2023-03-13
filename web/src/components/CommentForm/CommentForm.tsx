@@ -12,7 +12,7 @@ import {
   useForm,
 } from '@redwoodjs/forms'
 import { useMutation } from '@redwoodjs/web'
-import { toast, Toaster } from '@redwoodjs/web/toast'
+import { toast } from '@redwoodjs/web/toast'
 
 import { useAuth } from 'src/auth'
 import { QUERY as FindCommentQuery } from 'src/components/CommentCell'
@@ -37,7 +37,12 @@ interface Props {
   postId: number
 }
 
-const CommentForm = ({ bargainId, parentCommentId }: Props) => {
+const CommentForm = ({
+  bargainId,
+  parentCommentId,
+  setShowForm,
+  setShowChildComments,
+}: Props) => {
   const { userMetadata } = useAuth()
   const formMethods = useForm()
 
@@ -45,6 +50,8 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
     onCompleted: () => {
       formMethods.reset()
       toast.success('Thank you for your comment!')
+      setShowForm(false)
+      setShowChildComments(parentCommentId)
     },
     refetchQueries: [
       { query: FindShowBargainQuery, variables: { id: bargainId } },
@@ -70,7 +77,6 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
   }
   return (
     <>
-      <Toaster />
       <div className="flex items-start space-x-4">
         <div className="flex-shrink-0">
           <img
@@ -91,13 +97,24 @@ const CommentForm = ({ bargainId, parentCommentId }: Props) => {
                 rows={2}
                 name="comment"
                 id="comment"
-                className="p-3 block w-full resize-none border-0 border-b border-transparent p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6"
+                className="block w-full resize-none border-0 border-b border-transparent p-3 p-0 pb-2 text-gray-900 placeholder:text-gray-400 focus:border-indigo-600 focus:ring-0 sm:text-sm sm:leading-6"
                 placeholder="Add your comment..."
                 // defaultValue={''}
                 validation={{ required: true }}
               />
             </div>
-            <div className="flex justify-between pt-2">
+            <div className="flex pt-2">
+              <div className="flex-shrink-0">
+                <button
+                  className="mr-3 inline-flex items-center rounded-md bg-red-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  onClick={() => {
+                    setShowForm(false)
+                    setShowChildComments(parentCommentId)
+                  }}
+                >
+                  Cancel
+                </button>
+              </div>
               <div className="flex-shrink-0">
                 <Submit
                   className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
